@@ -1,15 +1,28 @@
-# (itkbroke)?
+User au# (itkbroke)?
 > From broke people to broke people
 
 ## To-do
 ### Frontend
 * New-in/Brands/Clothing/Accessories/Sale/Cart/Profile pages
+* Navigation bar for mobile devices
 * Custom scrollbar
 * Implement registration/sign up process
 * Connect payment to backend
 * Connect registration to backend
 ### Backend
-* Not started yet
+* User authentication
+* Image storage process
+*  
+
+## Done
+### Frontend
+* Configured
+* Home page
+* Navigation bar + side menu
+* Added routing
+### Backend
+* Configured
+* Implemented database connection
 
 ## Links
 ### Work-links
@@ -33,3 +46,4 @@
 * Express `npm install express`
 * Dotenv `npm install dotenv`
 * Nodemon `npm install nodemon`
+* Mongoose `npm install mongoose`
