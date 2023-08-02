@@ -12,7 +12,9 @@ User au# (itkbroke)?
 ### Backend
 * User authentication
 * Image storage process
-*  
+
+## In progress
+* Frontend pages
 
 ## Done
 ### Frontend
