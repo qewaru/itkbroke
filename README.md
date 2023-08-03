@@ -3,9 +3,8 @@
 
 ## To-do
 ### Frontend
-* New-in/Brands/Clothing/Accessories/Sale/Cart/Profile pages
+* New-in/Clothing/Accessories/Sale/Cart/Profile pages
 * Navigation bar for mobile devices
-* Custom scrollbar
 * Implement registration/sign up process
 * Connect payment to backend
 * Connect registration to backend
@@ -22,6 +21,8 @@
 * Home page
 * Navigation bar + side menu
 * Added routing
+* Brands page
+* Custom scrollbar
 ### Backend
 * Configured
 * Implemented database connection
