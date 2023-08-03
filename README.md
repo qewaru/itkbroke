@@ -1,29 +1,44 @@
 # (itkbroke)?
 > From broke people to broke people
 
-## To-do
-### Frontend
+## Useful information
+### Couple of rules
+* Work and commit only in "dev" branch
+* Never commit directly to "main" branch without permission
+
+### Project installation
+1. Create project folder on your computer
+2. Open terminal with folder path - (C:\projects\itkbroke) 
+3. [Install Next.js](https://nextjs.org/docs/getting-started/installation) - `npx create-next-app@latest`, "project" folder name for Next.js - "client"
+4. Inside main project folder create new folder "server" and install Node.js - `npm init`
+5. Get back to terminal and connect to repository (check Git documentation below)
+6. Make sure that you connected to "dev" branch
+7. Clone repository to your workspace and merge your project files with existing files
+
+## Work process
+### To-do
+#### Frontend
 * New-in/Clothing/Accessories/Sale/Cart/Profile pages
 * Navigation bar for mobile devices
 * Implement registration/sign up process
 * Connect payment to backend
 * Connect registration to backend
-### Backend
+#### Backend
 * User authentication
 * Image storage process
 
-## In progress
+### In progress
 * Frontend pages
 
-## Done
-### Frontend
+### Done
+#### Frontend
 * Configured
 * Home page
 * Navigation bar + side menu
 * Added routing
 * Brands page
 * Custom scrollbar
-### Backend
+#### Backend
 * Configured
 * Implemented database connection
 
