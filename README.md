@@ -11,9 +11,10 @@
 2. Open terminal with folder path - (C:\projects\itkbroke) 
 3. [Install Next.js](https://nextjs.org/docs/getting-started/installation) - `npx create-next-app@latest`, "project" folder name for Next.js - "client"
 4. Inside main project folder create new folder "server" and install Node.js - `npm init`
-5. Get back to terminal and connect to repository (check Git documentation below)
-6. Make sure that you connected to "dev" branch
-7. Clone repository to your workspace and merge your project files with existing files
+5. Install all dependencies (list of them is below)
+6. Get back to terminal and connect to repository (check Git documentation below)
+7. Make sure that you connected to "dev" branch
+8. Clone repository to your workspace and merge your project files with existing files
 
 ## Work process
 ### To-do
