@@ -1,13 +1,14 @@
 "use client"
 import React, { useState } from "react"
 import { IoIosSearch } from 'react-icons/io'
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 
 // TEMPORARY ARRAY - needs to be deleted after implementing commented code with fetching data from db below
 const data = [
   {
     'A': [{ 'name': 'Name1', 'source': '/source1' }, { 'name': 'Name2', 'source': '/source2' }, { 'name': 'Name3', 'source': '/source3' }],
-    'C': [{ 'name': 'Name1', 'source': '/source1' }, { 'name': 'Name2', 'source': '/source2' }, { 'name': 'Name3', 'source': '/source3' }],
     'B': [{ 'name': 'Name1', 'source': '/source1' }, { 'name': 'Name2', 'source': '/source2' }, { 'name': 'Name3', 'source': '/source3' }],
+    'C': [{ 'name': 'Name1', 'source': '/source1' }, { 'name': 'Name2', 'source': '/source2' }, { 'name': 'Name3', 'source': '/source3' }],
     'D': [{ 'name': 'Name1', 'source': '/source1' }, { 'name': 'Name2', 'source': '/source2' }, { 'name': 'Name3', 'source': '/source3' }],
     'E': [{ 'name': 'Name1', 'source': '/source1' }, { 'name': 'Name2', 'source': '/source2' }, { 'name': 'Name3', 'source': '/source3' }],
     'F': [{ 'name': 'Name1', 'source': '/source1' }, { 'name': 'Name2', 'source': '/source2' }, { 'name': 'Name3', 'source': '/source3' }],
@@ -64,14 +65,39 @@ export default function Brands() {
   return (
     <>
       <header className="flex flex-col items-center justify-center w-full">
-        <div className="flex gap-8 text-xl font-bold py-10">
+        <div className="gap-8 w-auto text-xl font-bold py-10 hidden lg:flex">
           {data.map((item) => {
             return Object.entries(item).map(([letter, content]) => (
               <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
             ))
           })}
         </div>
-        <div className="flex items-center w-[400px] h-[60px] border-b border-secondary">
+
+        <div className="gap-8 w-auto text-xl font-bold py-10 hidden lg:hidden semimd:flex ">
+          <button><MdKeyboardArrowLeft size={25} /></button>
+          {data[0] && Object.entries(data[0]).slice(0, 18).map(([letter, content]) => (
+              <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
+          ))}
+          <button><MdKeyboardArrowRight size={25} /></button>
+        </div>
+
+        <div className="gap-8 w-auto text-xl font-bold py-10 hidden semimd:hidden md:flex">
+          <button><MdKeyboardArrowLeft size={25} /></button>
+          {data[0] && Object.entries(data[0]).slice(0, 10).map(([letter, content]) => (
+              <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
+          ))}
+          <button><MdKeyboardArrowRight size={25} /></button>
+        </div>
+
+        <div className="gap-8 w-auto text-xl font-bold py-10 flex md:hidden">
+          <button><MdKeyboardArrowLeft size={25} /></button>
+          {data[0] && Object.entries(data[0]).slice(0, 5).map(([letter, content]) => (
+              <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
+          ))}
+          <button><MdKeyboardArrowRight size={25} /></button>
+        </div>
+
+        <div className="flex items-center w-[300px] h-[60px] sm:w-[400px] border-b border-secondary">
           <input className="w-full h-full pl-2" placeholder="Search for a brand"/>
           <button className="h-full">
             <IoIosSearch size={25} />
@@ -79,7 +105,7 @@ export default function Brands() {
         </div>
       </header>
       <section className="flex justify-center w-full h-full my-[70px]">
-        <div className="w-auto grid grid-cols-4 gap-16 semimd:grid-cols-6">
+        <div className="w-auto grid grid-cols-2 gap-16 md:grid-cols-4 semimd:grid-cols-6">
         {data.map((item) => {
             return Object.entries(item).map(([letter, content]) => (
               <div key={letter} className={`flex flex-col p-2 hover:bg-secondary ${ clicked === letter ? 'bg-secondary' : '' }`}>
