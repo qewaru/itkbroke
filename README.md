@@ -20,6 +20,7 @@
 ### To-do
 #### Frontend
 * New-in/Clothing/Accessories/Sale/Cart/Profile pages
+* On Clothing+Accessories+Sale pages needs to be added a "Sort by" menu and range input field
 * Navigation bar for mobile devices
 * Implement registration/sign up process
 * Connect payment to backend
