@@ -44,6 +44,10 @@
 * Configured
 * Implemented database connection
 
+### Future features
+* Add a review section
+* Messanger (customers with owners)
+
 ## Links
 ### Work-links
 * Figma [direct link](https://www.figma.com/file/f6BjvXgXs9GVUNQs2MUJD9/Website?type=design&mode=design&t=eDPvBEuF9kpbvYK0-0)
