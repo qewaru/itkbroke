@@ -19,8 +19,9 @@
 ## Work process
 ### To-do
 #### Frontend
-* New-in/Clothing/Accessories/Sale/Cart/Profile pages
+* New-in/Sales/Brand/Cart/Profile pages
 * On Clothing+Accessories+Sale pages needs to be added a "Sort by" menu and range input field
+* Configure logic for buttons on Clothing pages + Item page
 * Navigation bar for mobile devices
 * Implement registration/sign up process
 * Connect payment to backend
@@ -35,11 +36,12 @@
 ### Done
 #### Frontend
 * Configured
-* Home page
+* Home, All Brands, Clothing, Accessories pages
 * Navigation bar + side menu
 * Added routing
-* Brands page
 * Custom scrollbar
+* Cloth Item page
+* Filterbar + Filter Sidebar for clothing\accessories pages
 #### Backend
 * Configured
 * Implemented database connection
@@ -71,3 +73,4 @@
 * Dotenv `npm install dotenv`
 * Nodemon `npm install nodemon`
 * Mongoose `npm install mongoose`
+* MongoDB `npm install mongodb`
