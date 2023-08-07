@@ -14,6 +14,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        'background': '#0D0E11',
         'primary': '#6b3caa',
         'secondary': '#3e1435',
         accent: '#578E8E', 
