@@ -31,8 +31,8 @@ export default function Navbar() {
             ))}
         </div>
         <div className='hidden semimd:flex gap-7 w-[80px] mr-5 '>
-            <a href="#"><FiBriefcase size={25}/></a>
-            <a href="#"><FiUser size={25}/></a>
+            <a href="/pages/cart"><FiBriefcase size={25}/></a>
+            <a href="/pages/profile"><FiUser size={25}/></a>
         </div>
         <div onClick={ handleToggle } className='semimd:hidden mr-5 cursor-pointer'>
           <FiMenu size={25} />

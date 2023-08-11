@@ -19,6 +19,8 @@ body {
 input {
   background: none;
   outline: none;
+  border: 1px solid #6B3CAA;
+  padding: 10px 20px;
 }
 
 select {
@@ -53,5 +55,5 @@ select {
 }
 
 ::-webkit-slider-thumb:hover {
-  background-color: #6b3caa;
+  background-color: #6B3CAA;
 }
