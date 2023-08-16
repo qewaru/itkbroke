@@ -14,7 +14,11 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowWindow(true);
+      const hasShownWindow = localStorage.getItem('hasShownWindow')
+      if (!hasShownWindow) {
+        setShowWindow(true)
+        localStorage.setItem('hasShownWindow', 'true')
+      }
     }, 1000);
 
     return () => clearTimeout(timer);

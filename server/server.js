@@ -2,6 +2,8 @@
 const express = require('express')
 const cors = require('cors')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 const app = express()
 require("dotenv").config()
 
@@ -20,22 +22,30 @@ async function connect() {
 }
 connect()
 
-app.use(cors())
-app.use(express.json());
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
+app.use(express.json())
+app.use(cookieParser())
 
 // API
 
 app.post('/api/registration', async (req, res) => {
     try {
         const userData = req.body
-        const hash = await bcrypt.hash(userData.password, 10)
-        userData.password = hash
-        res.status(200).send('Received')
-        db.collection('test').insertOne(userData, async (error, collection) => {
-            if (error) {
-                throw error
-            }
-        })
+        const existCheck = await db.collection('test').findOne({email: userData.email })
+        if (existCheck) {
+            return res.send('Exist')
+        } else {
+            const hash = await bcrypt.hash(userData.password, 10)
+            userData.password = hash
+            db.collection('test').insertOne(userData, async (err, user) => {
+                if (err) {
+                    throw err
+                }
+                if (user) {
+                    res.send('Allowed')
+                }
+            })
+        }
     } catch (err) {
         console.log(err)
     }
@@ -50,9 +60,10 @@ app.post('/api/login', async (req, res) => {
             }
             
             if (user) {
-                db.collection('test')
                 const compare = await bcrypt.compare(userData.password, user.password)
                 if (compare) {
+                    const token = jwt.sign({email: user.email}, process.env.SECRET)
+                    res.cookie('jwt', token,  { httpOnly: true, secure: false })
                     res.status(200).send('Allowed')
                 } else {
                     res.send('DenyPassword')
@@ -60,9 +71,52 @@ app.post('/api/login', async (req, res) => {
             } else {
                 res.send('DenyEmail')
             }
-        }) 
+        })
     } catch (err) {
         console.log(err)
+    }
+})
+
+app.post('/api/verification', async (req, res) => {
+    try {
+        const userEmail = req.body
+        db.collection('test').findOne({ email: userEmail.email }, async (err, user) => {
+            if (err) {
+                throw err
+            }
+
+            if (user) {
+                const newRole = user.role = 'pending'
+                await db.collection('test').updateOne(
+                    { email: user.email },
+                    { $set: { role: newRole } }
+                )
+                return res.send('Pending')
+            } else {
+                return res.send('NotFound')
+            }
+        })
+    } catch (err) {
+        throw err
+    }
+}) 
+
+app.get('/api/auth', async (req, res) => {
+    const token = req.cookies.jwt
+    if (token) {
+        try {
+            const decodeToken = jwt.verify(token, process.env.SECRET)
+            const userEmail = decodeToken.email
+            db.collection('test').findOne({ email:userEmail }, async (err, user) => {
+                if (err) {
+                    throw err
+                }
+                
+                res.status(200).send(`${user.role}`)
+            })
+        } catch (err) {
+            throw err
+        }
     }
 })
 

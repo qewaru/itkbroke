@@ -14,10 +14,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        'background': '#0D0E11',
+        'background': '#050505',
         'primary': '#6b3caa',
-        'secondary': '#3e1435',
-        accent: '#578E8E', 
+        'secondary': '#1b1d1b',
+        accent: '#86857e',
       },
       fontFamily: {
         'space': ['Space Mono', 'monospace']
@@ -26,3 +26,15 @@ module.exports = {
   },
   plugins: [],
 }
+
+// 'text': '#f9f8fc',
+// 'background': '#100e1b',
+// 'primary': '#3b2447',
+// 'secondary': '#251322',
+// accent: '#ab599e',
+
+// 'text': '#ededee',
+// 'background': '#050505',
+// 'primary': '#6b3caa',
+// 'secondary': '#1b1d1b',
+// 'accent': '#86857e',

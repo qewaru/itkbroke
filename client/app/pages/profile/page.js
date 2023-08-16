@@ -1,6 +1,7 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Account from './components/Account'
+import LogAccount from './components/LogAccount'
 import Payments from './components/Payments'
 import History from './components/History'
 import Following from './components/Following'
@@ -13,12 +14,43 @@ import { RiGroupLine } from 'react-icons/ri'
 
 export default function Profile() {
     const [type, setType] = useState('account')
+    const [status, setStatus] = useState()
 
     const handleType = (objectType) => {
         setType(objectType)
     }
 
+    useEffect(() => {
+        const hasLoggedIn = localStorage.getItem('hasLoggedIn')
+        if (hasLoggedIn) {
+            setStatus(true)
+        } else {
+            setStatus(false)
+        }
+      }, [])    
+
   return (
+    <>
+    {status === false &&
+    <section className='flex'>
+        <aside className='w-[500px] h-screen p-8'>
+            <div className='flex flex-col'>
+                <p className='text-bold text-xl'>Your profile</p>
+                <div className='flex flex-col text-lg my-10 px-5 gap-5'>
+                    <div onClick={ () => handleType('account') } className='flex cursor-pointer gap-3'>
+                        <FiUser size={25} />
+                        <p className='hover:text-primary'>Account</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <section className='bg-[#111215] w-full'>
+            {type === 'account' && <LogAccount />}
+        </section>
+    </section>
+    }
+
+    {status === true && 
     <section className='flex'>
         <aside className='w-[500px] h-screen p-8'>
             <div className='flex flex-col'>
@@ -55,5 +87,7 @@ export default function Profile() {
             {type === 'partnership' && <Partnership />}
         </section>
     </section>
+    }
+    </>
   )
 }
