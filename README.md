@@ -19,26 +19,27 @@
 ## Work process
 ### To-do
 #### Frontend
-* New-in/Sales/Brand/Cart/Profile pages
+* New-in/Sales pages
 * On Clothing+Accessories+Sale pages needs to be added a "Sort by" menu and range input field
 * Configure logic for buttons on Clothing pages + Item page
 * Navigation bar for mobile devices
 * Connect payment to backend
 #### Backend
 * Image storage process
-* Configure owner and user accessability
+
 
 ### In progress
 * Frontend pages
+* Authorization proccess
+* Owner control panel
 
 ### Done
 #### Frontend
 * Configured
-* Home, All Brands, Clothing, Accessories pages
+* Home, All Brands, Clothing, Accessories, Brand, Cart, Profile, Item pages
 * Navigation bar + side menu
 * Added routing
 * Custom scrollbar
-* Cloth Item page
 * Filterbar + Filter Sidebar for clothing\accessories pages
 * Pop-up window for logging in and registration
 * Connected pop-up window to backend
@@ -46,6 +47,8 @@
 * Configured
 * Implemented database connection
 * Added registration+logging in
+* Configured owner and user accessability
+* Added accessability by role
 
 ### Future features
 * Add a review section
