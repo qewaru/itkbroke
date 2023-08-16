@@ -1,93 +1,94 @@
-"use client"
+"use clinet"
 import React, { useState, useEffect } from 'react'
-import { IoIosClose } from 'react-icons/io'
 
-export default function PopWindow() {
-  const [open, setOpen] = useState(true)
-  const [switcher, setSwitcher] = useState('signup')
-  const [error, setError] = useState('')
-  const [userData, setUserData] = useState({
-    name1: '',
-    name2: '',
-    email: '',
-    password: '',
-    date: '',
-    role: 'user'
-  })
-
-  const handleOpen = () => {
-    setOpen(!open)
-  }
-
-  const handleSwitch = (type) => {
-    setSwitcher(type)
-  }
-
-  const handleError = (type) => {
-    setError(type)
-  }
-
-  const handleInput = (event) => {
-    const { name, value } = event.target
-    setUserData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }))
-  }
-
-  const handleReg = async (event) => {
-    event.preventDefault()
-    const currentDate = new Date().toISOString().substring(0, 10)
-    const userDataNew = {
-      ...userData,
-      date: currentDate,
-    };
-    const response = await fetch('http://localhost:4000/api/registration', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userDataNew)
+export default function LogAccount() {
+    const [ user, setUser ] = useState(null)
+    const [switcher, setSwitcher] = useState('signup')
+    const [error, setError] = useState('')
+    const [userData, setUserData] = useState({
+      name1: '',
+      name2: '',
+      email: '',
+      password: '',
+      date: '',
+      role: 'user'
     })
-
-    const data = await response.text()
-    if (data === 'Allowed') {
-      handleOpen()
-      localStorage.setItem('hasLoggedIn', 'true')
-    } else {
-      handleError(data)
+  
+    const handleSwitch = (type) => {
+      setSwitcher(type)
     }
-  }
-
-  const handleLog = async (event) => {
-    event.preventDefault()
-    const response = await fetch('http://localhost:4000/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData)
-    })
-    const data = await response.text()
-    if (data === 'Allowed') {
-      handleOpen()
-      localStorage.setItem('hasLoggedIn', 'true')
-    } else {
-      handleError(data)
+  
+    const handleError = (type) => {
+      setError(type)
     }
-  }
+  
+    const handleInput = (event) => {
+      const { name, value } = event.target
+      setUserData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }))
+    }
+  
+    const handleReg = async (event) => {
+      event.preventDefault()
+      const currentDate = new Date().toISOString().substring(0, 10)
+      const userDataNew = {
+        ...userData,
+        date: currentDate,
+      };
+      const response = await fetch('http://localhost:4000/api/registration', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userDataNew),
+        credentials: 'include'
+      })
+  
+      const data = await response.text()
+      if (data === 'Allowed') {
+        localStorage.setItem('hasLoggedIn', 'true')
+        location.reload()
+      } else {
+        handleError(data)
+      }
+    }
+  
+    const handleLog = async (event) => {
+      event.preventDefault()
+      const response = await fetch('http://localhost:4000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+        credentials: 'include'
+      })
+      const data = await response.text()
+      if (data === 'Allowed') {
+        localStorage.setItem('hasLoggedIn', 'true')
+        location.reload()
+      } else {
+        handleError(data)
+      }
+    }
+
+    useEffect(() => {
+      const token = localStorage.getItem('jwt')
+      if (token) {
+        const decode = jwt_decode(token)
+        setUser(decode)
+      }
+    }, [])
 
   return (
-    <div className={
-      open ? 'fixed flex justify-center items-center left-0 top-0 w-full h-screen bg-black/50' :
-      'fixed hidden justify-center items-center left-0 top-0 w-full h-screen bg-black/50'
-    }>
-      <div className='flex flex-col justify-center items-center w-[500px] h-auto bg-secondary'>
-        <header className='relative flex flex-col items-center w-full py-5'>
-          <IoIosClose onClick={handleOpen} size={40} className='absolute right-0 top-0 cursor-pointer' />
-          <p className='text-xl'>New here?</p>
-          <p className='text-lg'>Create a new account or log in</p>
+    <div className='flex flex-col gap-10 items-center py-10'>
+        <header>
+            <p className='text-lg'>You must log in or sign up to use Profile settings</p>
         </header>
+        <footer>
+        <div className='flex flex-col justify-center items-center w-[500px] h-auto'>
         {switcher === 'login' && 
           <form onSubmit={handleLog} className='w-full'>
             <section className='flex flex-col gap-5 items-center w-full py-5 px-14'>
@@ -188,11 +189,7 @@ export default function PopWindow() {
           </form>
         }
       </div>
+        </footer>
     </div>
   )
 }
-
-[{
-  'govno': 'oleg',
-
-}]

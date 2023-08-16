@@ -12,7 +12,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className='sticky w-full h-[50px] border-b border-b-primary/50'>
+    <header className='w-full h-[50px] border-b border-b-primary/50'>
       <div className='flex items-center justify-between w-full h-full'>
         <div className='w-[80px] ml-5'>
           <Link href='/'>
@@ -31,8 +31,8 @@ export default function Navbar() {
             ))}
         </div>
         <div className='hidden semimd:flex gap-7 w-[80px] mr-5 '>
-            <a href="#"><FiBriefcase size={25}/></a>
-            <a href="#"><FiUser size={25}/></a>
+            <a href="/pages/cart"><FiBriefcase size={25}/></a>
+            <a href="/pages/profile"><FiUser size={25}/></a>
         </div>
         <div onClick={ handleToggle } className='semimd:hidden mr-5 cursor-pointer'>
           <FiMenu size={25} />

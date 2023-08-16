@@ -9,9 +9,51 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Space Mono', monospace;
-  color: #EBEBF0;
+  color: #ededee;
 }
 
 body {
   background-color: #0d0e11;
+}
+
+input {
+  background: none;
+  outline: none;
+  border: 1px solid #6B3CAA;
+  padding: 10px 20px;
+}
+
+select {
+  appearance: none;
+  outline: none;
+}
+
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+::-webkit-slider-thumb {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #3e1435;
+  cursor: pointer;
+}
+
+::-webkit-slider-thumb:hover {
+  background-color: #6B3CAA;
 }
