@@ -19,7 +19,7 @@
 ## Work process
 ### To-do
 #### Frontend
-* New-in/Sales pages
+* New-in pages
 * On Clothing+Accessories+Sale pages needs to be added a "Sort by" menu and range input field
 * Configure logic for buttons on Clothing pages + Item page
 * Navigation bar for mobile devices
