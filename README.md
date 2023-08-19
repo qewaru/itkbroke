@@ -52,7 +52,7 @@
 
 ### Future features
 * Add a review section
-* Messanger (customers with owners)
+* Messenger (customers with owners)
 
 ## Links
 ### Work-links
@@ -78,3 +78,7 @@
 * Nodemon `npm install nodemon`
 * Mongoose `npm install mongoose`
 * MongoDB `npm install mongodb`
+* BCrycpt `npm install bcrypt`
+* JWT `npm install jsonwebtoken`
+* CORS `npm install cors`
+* CookieParser `npm install cookie-parser`
