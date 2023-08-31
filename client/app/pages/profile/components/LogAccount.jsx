@@ -69,6 +69,9 @@ export default function LogAccount() {
       if (data === 'Allowed') {
         localStorage.setItem('hasLoggedIn', 'true')
         location.reload()
+      } else if (data === 'AllowedEntry') {
+        sessionStorage.setItem('isAdmin', 'true')
+        window.location.href = 'http://localhost:3000/dashboard'
       } else {
         handleError(data)
       }
