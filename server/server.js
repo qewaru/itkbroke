@@ -1,3 +1,8 @@
+// NOTES
+// Change jwt token name
+// Change db collection name
+
+
 // DEPENDENICES
 const express = require('express')
 const cors = require('cors')
@@ -31,13 +36,13 @@ app.use(cookieParser())
 app.post('/api/registration', async (req, res) => {
     try {
         const userData = req.body
-        const existCheck = await db.collection('test').findOne({email: userData.email })
+        const existCheck = await db.collection('users').findOne({email: userData.email })
         if (existCheck) {
             return res.send('Exist')
         } else {
             const hash = await bcrypt.hash(userData.password, 10)
             userData.password = hash
-            db.collection('test').insertOne(userData, async (err, user) => {
+            db.collection('users').insertOne(userData, async (err, user) => {
                 if (err) {
                     throw err
                 }
@@ -54,17 +59,21 @@ app.post('/api/registration', async (req, res) => {
 app.post('/api/login', async (req, res) => {
     try {
         const userData = req.body
-        db.collection('test').findOne({ email: userData.email }, async (err, user) => {
+        db.collection('users').findOne({ email: userData.email }, async (err, user) => {
             if (err) {
                 throw err
             }
-            
+
             if (user) {
                 const compare = await bcrypt.compare(userData.password, user.password)
                 if (compare) {
                     const token = jwt.sign({email: user.email}, process.env.SECRET)
-                    res.cookie('jwt', token,  { httpOnly: true, secure: false })
-                    res.status(200).send('Allowed')
+                    if (user.email === 'admin') {
+                        res.status(200).send('AllowedEntry')
+                    } else {
+                        res.cookie('jwt', token,  { httpOnly: true, secure: false })
+                        res.status(200).send('Allowed')
+                    }
                 } else {
                     res.send('DenyPassword')
                 }
@@ -78,28 +87,73 @@ app.post('/api/login', async (req, res) => {
 })
 
 app.post('/api/verification', async (req, res) => {
-    try {
-        const userEmail = req.body
-        db.collection('test').findOne({ email: userEmail.email }, async (err, user) => {
-            if (err) {
-                throw err
-            }
+    const token = req.cookies.jwt
+    const userData = req.body
+    if (token) {
+        try {
+            const decodeToken = jwt.verify(token, process.env.SECRET)
+            const userEmail = decodeToken.email
+            db.collection('users').findOne({ email: userEmail }, async (err, user) => {
+                if (err) {
+                    throw err
+                }
+                
+                if (user) {
+                    const newRole = user.role = 'pending'
+                    await db.collection('users').updateOne(
+                        { email: user.email },
+                        { $set: { role: newRole } }
+                    )
 
-            if (user) {
-                const newRole = user.role = 'pending'
-                await db.collection('test').updateOne(
-                    { email: user.email },
-                    { $set: { role: newRole } }
-                )
-                return res.send('Pending')
-            } else {
-                return res.send('NotFound')
-            }
-        })
-    } catch (err) {
-        throw err
+                    const brandData = {
+                        ...userData,
+                        date: new Date().toISOString().substring(0, 10),
+                        email: user.email
+                    }
+                    db.collection('verify').insertOne(brandData, async (err, user) => {
+                        if (err) {
+                            throw err
+                        }
+                    })
+                    return res.status(200).send(`${user.role}`)
+                } else {
+                    return res.status(404).send('not found')
+                }
+            })
+        } catch (err) {
+            throw err
+        }
     }
-}) 
+})
+
+app.post('/api/updateVerify', async (req, res) => {
+    const status = req.body.status
+    const data = req.body.data
+    
+    const brandData = {
+            ...data,
+            shortName: data.name.replace(/[^a-zA-Z0-9]/g, '')
+    }
+
+    switch (status) {
+        case 'allow':
+            try {
+                await db.collection('brands').insertOne(brandData, async (err, user) => {
+                    if (err) throw err
+
+                    if (user) {
+                        await db.collection('verify').deleteOne({ email: brandData.email })
+                    }
+                    return res.status(200)
+                })
+            } catch (error) {
+                throw error
+            }
+        
+        case 'deny':
+            return res.status(400)
+    }
+})
 
 app.get('/api/auth', async (req, res) => {
     const token = req.cookies.jwt
@@ -107,16 +161,42 @@ app.get('/api/auth', async (req, res) => {
         try {
             const decodeToken = jwt.verify(token, process.env.SECRET)
             const userEmail = decodeToken.email
-            db.collection('test').findOne({ email:userEmail }, async (err, user) => {
+            db.collection('users').findOne({ email:userEmail }, async (err, user) => {
                 if (err) {
                     throw err
                 }
-                
                 res.status(200).send(`${user.role}`)
             })
         } catch (err) {
             throw err
         }
+    }
+})
+
+app.get('/api/getUsers', async (req, res) => {
+    try {
+        const userData = await db.collection('verify').find().toArray()
+        res.json(userData)
+    } catch (err) {
+        throw err
+    }
+})
+
+app.get('/api/getBrands', async (req, res) => {
+    try {
+        const brandList = await db.collection('brands').find().toArray()
+        res.json(brandList)
+    } catch (err) {
+        throw err
+    }
+})
+
+app.get('/api/brands', async (req, res) => {
+    try {
+        const data = await db.collection('brands').find().toArray()
+        res.json(data)
+    } catch (err) {
+        throw err
     }
 })
 

@@ -33,7 +33,7 @@ export default function Page({ params }) {
                             <img src={ source } className='w-[70px] h-[70px] cursor-pointer' />
                         </div>
                     </div>
-                    <div className='flex flex-col my-8 w-full justify-between md:flex-row lg:w-[400px] lg:justify-normal'>
+                    <div className='flex flex-col my-8 w-full justify-between md:flex-row semimd:flex-col lg:w-[400px] lg:justify-normal'>
                         <div className='w-[50%] lg:w-full'>
                             <div>
                                 <a className='text-xl font-bold hover:text-primary' href='/'>Brand Name</a>

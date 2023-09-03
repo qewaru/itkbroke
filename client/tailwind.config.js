@@ -15,9 +15,10 @@ module.exports = {
     extend: {
       colors: {
         'background': '#050505',
+        'second': '#1b1d1b',
         'primary': '#6b3caa',
-        'secondary': '#1b1d1b',
-        accent: '#86857e',
+        'secondary': '#3b0a79',
+        accent: '#b076ff',
       },
       fontFamily: {
         'space': ['Space Mono', 'monospace']
@@ -27,14 +28,23 @@ module.exports = {
   plugins: [],
 }
 
+// GOVNO
 // 'text': '#f9f8fc',
 // 'background': '#100e1b',
 // 'primary': '#3b2447',
 // 'secondary': '#251322',
 // accent: '#ab599e',
 
+// DEFAULT
 // 'text': '#ededee',
 // 'background': '#050505',
 // 'primary': '#6b3caa',
 // 'secondary': '#1b1d1b',
 // 'accent': '#86857e',
+
+// STEPAN
+// --text: #ededee;
+// --background: #050505;
+// --primary: #6b3caa;
+// --secondary: #3b0a79;
+// --accent: #b076ff;
