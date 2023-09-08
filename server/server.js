@@ -1,7 +1,4 @@
 // NOTES
-// Change jwt token name
-// Change db collection name
-
 
 // DEPENDENICES
 const express = require('express')
@@ -9,11 +6,13 @@ const cors = require('cors')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 const app = express()
 require("dotenv").config()
 
 // DATABASE CONNECTION
 const mongoose = require('mongoose')
+const { configDotenv } = require('dotenv')
 const db = mongoose.connection
 const uri = `mongodb+srv://${process.env.MONGODB}.mongodb.net/itkbroke?retryWrites=true&w=majority`
 
@@ -28,8 +27,10 @@ async function connect() {
 connect()
 
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
-app.use(express.json())
+app.use(express.json({limit: '10mb'}))
+app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 app.use(cookieParser())
+app.use(bodyParser.json({ limit: '10mb' }))
 
 // API
 
@@ -129,7 +130,7 @@ app.post('/api/verification', async (req, res) => {
 app.post('/api/updateVerify', async (req, res) => {
     const status = req.body.status
     const data = req.body.data
-    
+
     const brandData = {
             ...data,
             shortName: data.name.replace(/[^a-zA-Z0-9]/g, '')
@@ -152,6 +153,34 @@ app.post('/api/updateVerify', async (req, res) => {
         
         case 'deny':
             return res.status(400)
+    }
+})
+
+app.post('/api/newItem', async (req, res) => {
+    const data = req.body
+    const token = req.cookies.jwt
+    try {
+        const decodeToken = jwt.verify(token, process.env.SECRET)
+        const brandData = await db.collection('brands').findOne({ email: decodeToken.email })
+        const itemData = {
+            ...data,
+            email: decodeToken.email,
+            brandName: brandData.name,
+            shortName: data.name.replace(/[^a-zA-Z0-9]/g, '')
+        }
+        try {
+            db.collection('items').insertOne(itemData, async (err, item) => {
+                if (err) throw err
+    
+                if (item) {
+                    res.status(200).send('saved')
+                }
+            })
+        } catch (err) {
+            throw err
+        }
+    } catch (err) {
+        throw err
     }
 })
 
@@ -198,6 +227,64 @@ app.get('/api/brands', async (req, res) => {
     } catch (err) {
         throw err
     }
+})
+
+app.get('/api/brand/:params', async (req, res) => {
+    const params = req.params
+    try {
+        const data = await db.collection('brands').findOne({shortName: params.params})
+        res.json(data)
+    } catch (err) {
+        throw err
+    }
+})
+
+app.get('/api/item/:name', async (req, res) => {
+    const shortName = req.params.name
+    try {
+        const data = await db.collection('items').findOne({shortName: shortName})
+        res.json(data)
+    } catch (err) {
+        throw err
+    }
+})
+
+app.get('/api/userInfo', async (req, res) => {
+    const token = req.cookies.jwt
+    if (token) {
+        try {
+            const decodeToken = jwt.verify(token, process.env.SECRET)
+            const userEmail = decodeToken.email
+            const data = await db.collection('users').findOne({ email: userEmail })
+            res.json(data)
+        } catch (err) {
+            throw err
+        }
+    }
+})
+
+app.get('/api/getClothing', async (req, res) => {
+    try {
+        const data = await db.collection('items').find({ category: 'cloth', status: 'In stock', sale: 'no' }).toArray()
+        res.json(data)
+    } catch (err) {
+        throw err
+    }
+})
+
+app.get('/api/browseItems', async (req, res) => {
+    const token = req.cookies.jwt
+    if (token) {
+        const decodeToken = jwt.verify(token, process.env.SECRET)
+        const userEmail = decodeToken.email
+
+        try {
+            const itemList = await db.collection('items').find({ email: userEmail }).toArray()
+            res.json(itemList)
+        } catch (error) {
+            error
+        }
+    } 
 })
 
 // SERVER PORT

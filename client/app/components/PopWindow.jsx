@@ -66,12 +66,16 @@ export default function PopWindow() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
+      credentials: 'include'
     })
     const data = await response.text()
     if (data === 'Allowed') {
-      handleOpen()
       localStorage.setItem('hasLoggedIn', 'true')
+      location.reload()
+    } else if (data === 'AllowedEntry') {
+      sessionStorage.setItem('isAdmin', 'true')
+      window.location.href = 'http://localhost:3000/dashboard'
     } else {
       handleError(data)
     }

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,18 +9,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Space Mono', monospace;
-  color: #ededee;
-}
-
-body {
-  background-color: #0d0e11;
+  font-family: 'Geologica', sans-serif;
+  /* font-family: 'Space Mono', monospace; */
+  color: #effbea;   
 }
 
 input {
   background: none;
   outline: none;
-  border: 1px solid #6B3CAA;
+  border: 1px solid rgb(107 60 170);
+  border-radius: 15px;
   padding: 10px 20px;
 }
 
@@ -40,6 +39,16 @@ th, td {
 th {
   background-color: #f2f2f2;
   color: black;
+}
+
+button {
+  padding: 12px 20px;
+  background-color: rgb(107 60 170 / 0.5);
+  border-radius: 15px;
+}
+
+button:hover {
+  background-color: rgb(107 60 170);
 }
 
 ::-webkit-scrollbar {

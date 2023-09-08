@@ -33,6 +33,11 @@ export default function Brands() {
     setClicked(letter)
   }
 
+  const handleLink = (id) => {
+    const array = data.find((item) => item._id === id)
+    window.location.href = `/pages/brands/${ array.shortName }`
+  }
+
   return (
     <>
       <header className="flex flex-col items-center justify-center w-full">
@@ -43,32 +48,32 @@ export default function Brands() {
         </div>
 
         <div className="gap-8 w-auto text-xl font-bold py-10 hidden lg:hidden semimd:flex ">
-          <button><MdKeyboardArrowLeft size={25} /></button>
+          <button className="bg-transparent"><MdKeyboardArrowLeft size={25} /></button>
           {letters.slice(0, 18).map((letter) => (
               <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
           ))}
-          <button><MdKeyboardArrowRight size={25} /></button>
+          <button className="bg-transparent"><MdKeyboardArrowRight size={25} /></button>
         </div>
 
         <div className="gap-8 w-auto text-xl font-bold py-10 hidden semimd:hidden md:flex">
-          <button><MdKeyboardArrowLeft size={25} /></button>
+          <button className="bg-transparent"><MdKeyboardArrowLeft size={25} /></button>
           {letters.slice(0, 10).map((letter) => (
               <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
           ))}
-          <button><MdKeyboardArrowRight size={25} /></button>
+          <button className="bg-transparent"><MdKeyboardArrowRight size={25} /></button>
         </div>
 
         <div className="gap-8 w-auto text-xl font-bold py-10 flex md:hidden">
-          <button><MdKeyboardArrowLeft size={25} /></button>
+          <button className="bg-transparent"><MdKeyboardArrowLeft size={25} /></button>
           {letters.slice(0, 5).map((letter) => (
               <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
           ))}
-          <button><MdKeyboardArrowRight size={25} /></button>
+          <button className="bg-transparent"><MdKeyboardArrowRight size={25} /></button>
         </div>
 
         <div className="flex items-center w-[300px] h-[60px] sm:w-[400px] border-b border-secondary">
-          <input className="w-full h-full pl-2" placeholder="Search for a brand"/>
-          <button className="h-full">
+          <input className="w-full h-full pl-2 border-none" placeholder="Search for a brand"/>
+          <button className="h-full bg-transparent hover:bg-transparent">
             <IoIosSearch size={25} />
           </button>
         </div>
@@ -80,9 +85,9 @@ export default function Brands() {
                 <p className="text-xl font-bold">{letter}</p>
                 <div className="flex flex-col pt-5">
                     {sortData[letter]?.map((item, index) => (
-                        <a className="hover:text-primary" href="#" key={index}>
-                            {item.shortName}
-                        </a>
+                        <span onClick={ () => handleLink(item._id)} className="hover:text-primary cursor-pointer" key={index}>
+                            {item.name}
+                        </span>
                     ))}
                 </div>
             </div>

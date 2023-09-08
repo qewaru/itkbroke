@@ -1,9 +1,25 @@
-import React from 'react'
+"use client"
+import React, { useState, useEffect } from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 
 const source = '/images/banners.png'
 
 export default function Brand({params}) {
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const fetchData = async () => {
+    const name = params.shortName
+    const response = await fetch(`http://localhost:4000/api/brand/${name}`, {
+      method: 'GET',
+    })
+    const jsonResponse = await response.json()
+    setData(jsonResponse)
+  }
+
   return (
     <>
     <section className='flex justify-center px-20'>
@@ -12,7 +28,7 @@ export default function Brand({params}) {
             <div className='text-lg mb-10'>
                 <a className='hover:text-primary' href='/'>Home \ </a>
                 <a className='hover:text-primary' href='/'>Brands  \ </a>
-                <a className='hover:text-primary' href='/'>{params.name}</a>
+                <a className='hover:text-primary' href='/'>{data.name}</a>
             </div>
         </header>
         <footer className='flex flex-col items-center gap-5 md:flex-row md:items-start md:gap-0'>
@@ -20,15 +36,15 @@ export default function Brand({params}) {
                 <img src={source} className='w-[300px]' />
             </div>
             <div className='flex flex-col items-center md:items-baseline'>
-                <p className='text-xl text-primary font-bold'>{params.name}</p>
+                <p className='text-xl text-primary font-bold'>{data.name}</p>
                 <div className='my-7'>
                     <div className='flex'>
                         <p>Author: </p>
-                        <p>???@???.com</p>
+                        <p>{data.email}</p>
                     </div>
                     <div className='flex'>
                         <p>Theme: </p>
-                        <p>???</p>
+                        <p>{data.type}</p>
                     </div>
                     <div className='flex'>
                         <p>Delivery: </p>
