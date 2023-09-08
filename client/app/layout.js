@@ -1,6 +1,5 @@
-"use client"
 import './globals.css'
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 export const metadata = {
   title: 'itkbroke',
@@ -10,7 +9,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className='bg-background'>
         { children }
       </body>
     </html>

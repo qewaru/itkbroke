@@ -1,12 +1,28 @@
-import React from 'react'
+"use client"
+import React, { useState, useEffect } from 'react'
 import { AiOutlineEdit } from 'react-icons/ai'
 
 export default function Account() {
+  const [ data, setData ] = useState([])
+  
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const fetchData = async () => {
+    const response = await fetch('http://localhost:4000/api/userInfo', {
+      method: 'GET',
+      credentials: 'include'
+    })
+    const jsonResponse = await response.json()
+    setData(jsonResponse)
+  }
+
   return (
     <div className='flex justify-center gap-36 py-10'>
       <div className='flex flex-col'>
         <div className='flex text-xl gap-3 items-center'>
-          <p>Fname Sname</p>
+          <p>{data.name1} {data.name2}</p>
           <div className='cursor-pointer'>
             <AiOutlineEdit size={20} />
           </div>
@@ -14,7 +30,7 @@ export default function Account() {
         <div className='flex flex-col text-xl my-5'>
           <p>Email</p>
           <div className='flex text-lg gap-3 items-center'>
-            <p>email@email.com</p>
+            <p>{data.email}</p>
             <div className='cursor-pointer'>
               <AiOutlineEdit size={20} />
             </div>

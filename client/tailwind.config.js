@@ -15,10 +15,11 @@ module.exports = {
     extend: {
       colors: {
         'background': '#050505',
-        'second': '#1b1d1b',
         'primary': '#6b3caa',
         'secondary': '#3b0a79',
-        accent: '#b076ff',
+        'second': '#1a191a',
+        'third': '#282A2E',
+        'accent': '#b076ff',
       },
       fontFamily: {
         'space': ['Space Mono', 'monospace']
@@ -48,3 +49,11 @@ module.exports = {
 // --primary: #6b3caa;
 // --secondary: #3b0a79;
 // --accent: #b076ff;
+
+// GREEN
+// 'background': '#040902',
+// 'background-second': '#293520',
+// 'primary': '#45961d',
+// 'secondary': '#0c1b05',
+// 'second': '#002E00',
+// 'accent': '#b5eb9a',
