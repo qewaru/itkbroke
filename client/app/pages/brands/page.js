@@ -49,25 +49,32 @@ export default function Brands() {
 
         <div className="gap-8 w-auto text-xl font-bold py-10 hidden lg:hidden semimd:flex ">
           <button className="bg-transparent"><MdKeyboardArrowLeft size={25} /></button>
-          {letters.slice(0, 18).map((letter) => (
-              <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
-          ))}
+          <div className="flex gap-6 items-center justify-center">
+            {letters.slice(0, 18).map((letter) => (
+                <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
+            ))}
+            </div>
           <button className="bg-transparent"><MdKeyboardArrowRight size={25} /></button>
         </div>
 
-        <div className="gap-8 w-auto text-xl font-bold py-10 hidden semimd:hidden md:flex">
+        <div className="gap-6 w-auto text-xl font-bold py-10 hidden semimd:hidden md:flex">
           <button className="bg-transparent"><MdKeyboardArrowLeft size={25} /></button>
-          {letters.slice(0, 10).map((letter) => (
-              <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
-          ))}
+          <div className="flex gap-4 items-center justify-center">
+            {letters.slice(0, 10).map((letter) => (
+                <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
+            ))}
+          </div>
           <button className="bg-transparent"><MdKeyboardArrowRight size={25} /></button>
         </div>
 
-        <div className="gap-8 w-auto text-xl font-bold py-10 flex md:hidden">
+        <div className="gap-4 w-auto text-xl font-bold py-10 flex md:hidden">
           <button className="bg-transparent"><MdKeyboardArrowLeft size={25} /></button>
-          {letters.slice(0, 5).map((letter) => (
-              <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
-          ))}
+          <div className="flex gap-4 items-center justify-center">
+            {letters.slice(0, 5).map((letter) => (
+                <div onClick={() => handleClick(letter) } className="cursor-pointer hover:text-primary" key={ letter }>{ letter }</div>
+            ))}
+          </div>
+          
           <button className="bg-transparent"><MdKeyboardArrowRight size={25} /></button>
         </div>
 

@@ -1,7 +1,8 @@
 "use client"
 import React, { useState } from 'react'
-import { FiUser, FiBriefcase, FiMenu } from 'react-icons/fi'
+import { FiUser, FiMenu } from 'react-icons/fi'
 import { IoIosClose } from 'react-icons/io'
+import { BsBag } from 'react-icons/bs'
 import Link from 'next/link'
 
 export default function Navbar() {
@@ -31,10 +32,10 @@ export default function Navbar() {
             ))}
         </div>
         <div className='hidden semimd:flex gap-7 w-[80px] mr-5 '>
-            <a href="/pages/cart"><FiBriefcase size={25}/></a>
-            <a href="/pages/profile"><FiUser size={25}/></a>
+            <a href="/pages/cart"><BsBag size={20}/></a>
+            <a href="/pages/profile"><FiUser size={23}/></a>
         </div>
-        <div onClick={ handleToggle } className='semimd:hidden mr-5 cursor-pointer'>
+        <div onClick={ handleToggle } className='hidden sm:block semimd:hidden mr-5 cursor-pointer'>
           <FiMenu size={25} />
         </div>
       </div>

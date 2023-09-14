@@ -7,11 +7,13 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+const stripe = require('stripe')('sk_test_51MhsuUKRgv2CaMZJgM7NxJAscPwWUtbMwdaS7Yy3wYTYI8lBWnkVlbGCF90Co8FPqXRJlIu35AXIF9v6ZxGglp6Z00zKFZekTx')
 const app = express()
 require("dotenv").config()
 
 // DATABASE CONNECTION
 const mongoose = require('mongoose')
+const ObjectId = require('mongodb').ObjectId
 const { configDotenv } = require('dotenv')
 const db = mongoose.connection
 const uri = `mongodb+srv://${process.env.MONGODB}.mongodb.net/itkbroke?retryWrites=true&w=majority`
@@ -33,6 +35,34 @@ app.use(cookieParser())
 app.use(bodyParser.json({ limit: '10mb' }))
 
 // API
+
+app.post('/api/checkout', async (req, res) => {
+    const data = req.body
+    try {
+        const itemIds = data.map((item) => new ObjectId(item.id))
+        const itemData = await db.collection('items').find({ _id: { $in: itemIds } }).toArray()
+        const session = await stripe.checkout.sessions.create({
+            line_items: itemData.map(item => {
+                return {
+                  price_data: {
+                    currency: 'eur',
+                    product_data: {
+                      name: item.name,
+                    },
+                    unit_amount: item.price * 100,
+                  },
+                  quantity: 1,
+                }
+              }),
+              mode: 'payment',
+              success_url: 'http://localhost:3000/pages/cart',
+              cancel_url: 'http://localhost:3000/pages/cart/checkout',
+        })
+        res.status(303).send({url: session.url})
+    } catch (error) {
+        throw error
+    }
+})
 
 app.post('/api/registration', async (req, res) => {
     try {
@@ -181,6 +211,17 @@ app.post('/api/newItem', async (req, res) => {
         }
     } catch (err) {
         throw err
+    }
+})
+
+app.post('/api/getCartItems', async (req, res) => {
+    const data = req.body
+    try {
+        const itemIds = data.map((item) => new ObjectId(item.id))
+        const itemData = await db.collection('items').find({ _id: { $in: itemIds } }).toArray()
+        res.json(itemData)
+    } catch (error) {
+        throw error
     }
 })
 

@@ -1,12 +1,38 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight, MdOutlineKeyboardArrowUp, MdOutlineKeyboardArrowDown } from 'react-icons/md'
+import secureLocalStorage from 'react-secure-storage'
 
 const source = '/images/banners.png'
-const size = ['XS', 'S', 'M', 'L', 'XL']
 
 export default function Page({ params }) {
     const [data, setData] = useState([])
+    const [ toggleAdd, setToggleAdd ] = useState(false)
+    const [ size, setSize ] = useState('')
+
+    const handleSize = (event) => {
+        setSize(event.target.value)
+    }
+
+    const handleAdd = async () => {
+        setToggleAdd(true)
+        setTimeout(() => {
+            setToggleAdd(false)
+        }, 5000)
+
+        const itemData =  {
+            id: data._id,
+            size: size
+        }
+
+        let storageArray = secureLocalStorage.getItem('cart')
+        if (!storageArray) {
+            storageArray = []
+        }
+        storageArray.push(itemData)
+        secureLocalStorage.setItem('cart', storageArray)
+    }
+
     useEffect(() => {
         fetchData()
       }, [])
@@ -22,7 +48,13 @@ export default function Page({ params }) {
 
     return (
     <>
-        <section className='flex justify-center w-full h-full py-12 text-lg'>
+        {toggleAdd && 
+            <div className='flex justify-center items-center text-lg stiicky w-full h-[50px] bottom-0 z-10 bg-success'>
+                <p className='text-background'>Added to <a href='/pages/cart' className='underline text-background'>cart</a></p>
+            </div>
+        }
+        <section className='relative flex justify-center w-full h-full py-10 text-lg'>
+            
             <div className='flex flex-col'>
                 <div className='text-lg'>
                     <a className='hover:text-primary' href='/'>Home \ </a>
@@ -57,12 +89,14 @@ export default function Page({ params }) {
                                 <p>{data.price} €</p>
                             </div>
                             <div className='flex flex-col gap-8 my-12'>
-                                <select className='bg-secondary py-3 px-6 hover:bg-primary border-none'>
+                                <select onChange={handleSize} className='bg-secondary py-3 px-6 hover:bg-primary border-none rounded-xl'>
                                     {data.sizes?.map((item, index) => (
                                         <option key={index} value={item}>{item}</option>
                                     ))}
                                 </select>
-                                <button className='bg-secondary py-3 px-6 hover:bg-primary'>Add to cart</button>
+                                <button onClick={handleAdd} className={toggleAdd === true ? 'bg-transparent py-3 px-6 hover:bg-transparent border-2 border-secondary' : 'bg-secondary py-3 px-6 hover:bg-primary'} >
+                                    {toggleAdd === true ? 'Added to cart' : 'Add to cart'}
+                                </button>
                             </div>
                         </div>
                         <div className=''>
