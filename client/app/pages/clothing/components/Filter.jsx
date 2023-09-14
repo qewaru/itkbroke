@@ -26,7 +26,7 @@ export default function Filter() {
 
   return (
     <header className="flex justify-center w-full h-[auto] pt-[45px] text-lg">
-        <div className="flex justify-between w-[80%] gap-3 flex-col sm:flex-row sm:gap-0">
+        <div className="flex justify-between w-[80%] gap-3 flex-col sm:flex-row">
           <div className="flex gap-5">
             <button onClick={ handleToggle } className="bg-secondary py-3 px-6 hover:bg-primary flex items-center gap-2">
               <BiFilterAlt size={20} /> All filters
@@ -37,11 +37,15 @@ export default function Filter() {
               ))}
             </div>
           </div>
+          
           <div className='flex flex-col'>
-            <button className="bg-secondary py-3 px-6 hover:bg-primary flex items-center gap-2">
-              Sort by
-              <MdOutlineKeyboardArrowDown size={20} />
-            </button>
+            <div>
+              <button className="bg-secondary py-3 px-6 hover:bg-primary flex items-center justify-between min-w-[150px]">
+                Sort by
+                <MdOutlineKeyboardArrowDown size={20} />
+              </button>
+            </div>
+            <div></div>
             {/* <div className='flex flex-col bg-secondary w-full'>
                 <button className='w-full hover:bg-primary py-2'>Default</button>
                 <button className='w-full hover:bg-primary py-2'>Low to high</button>

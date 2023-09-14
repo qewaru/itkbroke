@@ -20,6 +20,7 @@ module.exports = {
         'second': '#1a191a',
         'third': '#282A2E',
         'accent': '#b076ff',
+        'success': '#34eb4c',
       },
       fontFamily: {
         'space': ['Space Mono', 'monospace']
