@@ -28,7 +28,7 @@ async function connect() {
 }
 connect()
 
-app.use(cors({ origin: 'https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com', credentials: true }))
+app.use(cors({ origin: 'https://itkbroke.vercel.app', credentials: true }))
 app.use(express.json({limit: '10mb'}))
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 app.use(cookieParser())
