@@ -11,7 +11,7 @@ export default function Page() {
     // event.preventDefault()
     const array = data.find((user) => user.email === email)
     localStorage.setItem('brandData', JSON.stringify(array))
-    window.location.href = `http://localhost:3000/dashboard/verify/${ array.name }`
+    window.location.href = `https://itkbroke.vercel.app/dashboard/verify/${ array.name }`
   }
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function Page() {
       setAdmin(true)
 
       const data = async () => {
-        const response = await fetch('http://localhost:4000/api/getUsers', {
+        const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/getUsers', {
           method: 'GET',
         })
         const jsonResponse = await response.json()
@@ -30,7 +30,7 @@ export default function Page() {
       data()
 
       const brandList = async () => {
-        const response = await fetch('http://localhost:4000/api/getBrands', {
+        const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/getBrands', {
           method: 'GET',
         })
         const json = await response.json()
