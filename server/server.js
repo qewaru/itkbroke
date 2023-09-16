@@ -55,8 +55,8 @@ app.post('/api/checkout', async (req, res) => {
                 }
               }),
               mode: 'payment',
-              success_url: 'https://itkbroke.vercel.app/pages/cart',
-              cancel_url: 'https://itkbroke.vercel.app/pages/cart/checkout',
+              success_url: 'https://itkbroke.vercel.app/pages/cart/checkout/success',
+              cancel_url: 'https://itkbroke.vercel.app/pages/cart/checkout/cancel',
         })
         res.status(303).send({url: session.url})
     } catch (error) {

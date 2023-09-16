@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import PopWindow from '../components/PopWindow'
+import SmallNavbar from '../components/SmallNavbar'
 
 export default function MainLayout({children}) {
     const [showWindow, setShowWindow] = useState(false)
@@ -22,6 +23,7 @@ export default function MainLayout({children}) {
         {showWindow && <PopWindow />}
         <Navbar />
         {children}
+        <SmallNavbar />
     </>
   )
 }
