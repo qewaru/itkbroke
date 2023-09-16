@@ -10,7 +10,7 @@ export default function Account() {
   }, [])
 
   const fetchData = async () => {
-    const response = await fetch('http://localhost:4000/api/userInfo', {
+    const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/userInfo', {
       method: 'GET',
       credentials: 'include'
     })
