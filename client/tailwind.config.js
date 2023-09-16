@@ -7,10 +7,10 @@ module.exports = {
   ],
   theme: {
     screens: {
-      sm: '425px',
-      md: '768px',
-      'semimd': '900px',
-      lg: '1280px'
+      sm: '426px',
+      md: '769px',
+      'semimd': '901px',
+      lg: '1281px'
     },
     extend: {
       colors: {
@@ -21,6 +21,7 @@ module.exports = {
         'third': '#282A2E',
         'accent': '#b076ff',
         'success': '#34eb4c',
+        'deny': '#EB3434'
       },
       fontFamily: {
         'space': ['Space Mono', 'monospace']

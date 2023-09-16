@@ -55,6 +55,8 @@ export default function Cart() {
         return total + itemPrice
       }, 0);
       setTotal(totalPrice)
+    } else {
+      setTotal('00.00')
     }
   }, [items])
 
@@ -68,12 +70,12 @@ export default function Cart() {
   })
   
   return (
-    <section className='py-10 px-14'>
+    <section className='py-10 px-5 sm:px-14 h-screen'>
       <header>
         <p className='text-xl font-bold text-primary'>Shopping cart</p>
       </header>
-      <section className='flex'>
-        <section className='px-10 py-3 w-[80%]'>
+      <section className='flex flex-col sm:flex-row items-center sm:items-start'>
+        <section className='px-5 sm:px-10 py-3 w-full sm:w-[80%] border-b border-b-second sm:border-none'>
           {items && 
             <div className='flex flex-col gap-5'>
               <div className='flex justify-between text-lg py-3 px-5'>
@@ -109,7 +111,7 @@ export default function Cart() {
             <Empty />  
           }
         </section>
-        <footer className='flex flex-col gap-4 w-[20%] p-5'>
+        <footer className='flex flex-col gap-4 w-full semimd:w-[20%] p-5'>
           <p className='text-primary font-bold text-lg'>Summary</p>
           <div className='flex flex-col gap-2'>
             <div className='flex justify-between'>

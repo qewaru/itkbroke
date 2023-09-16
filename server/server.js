@@ -55,8 +55,8 @@ app.post('/api/checkout', async (req, res) => {
                 }
               }),
               mode: 'payment',
-              success_url: 'http://localhost:3000/pages/cart',
-              cancel_url: 'http://localhost:3000/pages/cart/checkout',
+              success_url: 'http://localhost:3000/pages/cart/checkout/success',
+              cancel_url: 'http://localhost:3000/pages/cart/checkout/cancel',
         })
         res.status(303).send({url: session.url})
     } catch (error) {
