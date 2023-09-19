@@ -16,6 +16,8 @@ export default function Account() {
     })
     const jsonResponse = await response.json()
     setData(jsonResponse)
+    console.log(jsonResponse)
+    console.log(data)
   }
 
   return (
