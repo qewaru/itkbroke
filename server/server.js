@@ -102,7 +102,6 @@ app.post('/api/login', async (req, res) => {
                     if (user.email === 'admin') {
                         res.status(200).send('AllowedEntry')
                     } else {
-                        console.log(token)
                         res.cookie('jwt', token,  { httpOnly: false, secure: true, sameSite: 'none' })
                         res.status(200).send('Allowed')
                     }
