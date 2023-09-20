@@ -49,7 +49,7 @@ export default function LogAccount() {
       const data = await response.text()
       if (data === 'Allowed') {
         localStorage.setItem('hasLoggedIn', 'true')
-        // location.reload()
+        location.reload()
       } else {
         handleError(data)
       }
@@ -68,7 +68,7 @@ export default function LogAccount() {
       const data = await response.text()
       if (data === 'Allowed') {
         localStorage.setItem('hasLoggedIn', 'true')
-        // location.reload()
+        location.reload()
       } else if (data === 'AllowedEntry') {
         sessionStorage.setItem('isAdmin', 'true')
         window.location.href = 'https://itkbroke.vercel.app/dashboard'
