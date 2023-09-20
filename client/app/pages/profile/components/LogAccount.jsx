@@ -42,8 +42,8 @@ export default function LogAccount() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userDataNew),
-        credentials: 'include'
+        credentials: 'include',
+        body: JSON.stringify(userDataNew)
       })
   
       const data = await response.text()
@@ -62,8 +62,8 @@ export default function LogAccount() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userData),
-        credentials: 'include'
+        credentials: 'include',
+        body: JSON.stringify(userData)
       })
       const data = await response.text()
       if (data === 'Allowed') {
