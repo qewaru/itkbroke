@@ -104,7 +104,7 @@ app.post('/api/login', async (req, res) => {
                         res.status(200).send('AllowedEntry')
                     } else {
                         console.log(token)
-                        res.cookie('jwt', token,  { httpOnly: true, secure: false })
+                        res.cookie('jwt', token,  { httpOnly: true, secure: true })
                         res.status(200).send('Allowed')
                     }
                 } else {
