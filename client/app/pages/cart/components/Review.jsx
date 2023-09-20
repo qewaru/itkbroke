@@ -11,13 +11,13 @@ export default function Review({userData}) {
   }, [])
 
   const submitData = async (e) => {
-    console.log(data)
     e.preventDefault()
     const response = await fetch('http://localhost:4000/api/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify(data),
     })
     const json = await response.json()

@@ -65,34 +65,34 @@ export default function Profile() {
 
     {status === true && 
     <section className='flex'>
-        <aside className='w-[500px] h-screen p-8'>
+        <aside className='w-[10%] sm:w-[30%] lg:w-[20%] h-screen p-0 sm:p-8'>
             <div className='flex flex-col'>
-                <p className='text-bold text-xl'>Your profile</p>
-                <div className='flex flex-col text-lg my-10 px-5 gap-5'>
-                    <div onClick={ () => handleType('account') } className='flex cursor-pointer gap-3'>
-                        <FiUser size={25} />
-                        <p className='hover:text-primary'>Account</p>
+                <p className='text-bold text-xl hidden sm:block'>Your profile</p>
+                <div className='flex flex-col text-lg my-10 md:px-5 gap-5 items-center md:items-start'>
+                    <div onClick={ () => handleType('account') } className='flex cursor-pointer gap-3 items-center'>
+                        <FiUser className='w-[20px] md:[25px]' />
+                        <p className='hover:text-primary hidden sm:block'>Account</p>
                     </div>
-                    <div onClick={ () => handleType('payments') } className='flex cursor-pointer gap-3'>
-                        <BiCreditCard size={25} />
-                        <p className='hover:text-primary'>Payments</p>
+                    <div onClick={ () => handleType('payments') } className='flex cursor-pointer gap-3 items-center'>
+                        <BiCreditCard className='w-[20px] md:[25px]' />
+                        <p className='hover:text-primary hidden sm:block'>Payments</p>
                     </div>
-                    <div onClick={ () => handleType('history') } className='flex cursor-pointer gap-3'>
-                        <AiOutlineHistory size={25} />
-                        <p className='hover:text-primary'>History</p>
+                    <div onClick={ () => handleType('history') } className='flex cursor-pointer gap-3 items-center'>
+                        <AiOutlineHistory className='w-[20px] md:[25px]' />
+                        <p className='hover:text-primary hidden sm:block'>History</p>
                     </div>
-                    <div onClick={ () => handleType('following') } className='flex cursor-pointer gap-3'>
-                        <AiOutlineHeart size={25} />
-                        <p className='hover:text-primary'>Following</p>
+                    <div onClick={ () => handleType('following') } className='flex cursor-pointer gap-3' items-center>
+                        <AiOutlineHeart className='w-[20px] md:[25px]' />
+                        <p className='hover:text-primary hidden sm:block'>Following</p>
                     </div>
                 </div>
-                <div onClick={ () => handleType('partnership') } className='flex cursor-pointer text-lg my-5 px-5 gap-3'>
-                    <RiGroupLine size={25} />
-                    <p className='hover:text-primary'>Partnership</p>
+                <div onClick={ () => handleType('partnership') } className='flex cursor-pointer justify-center md:justify-start text-lg my-5 md:px-5 gap-3 items-center'>
+                    <RiGroupLine className='w-[20px] md:[25px]' />
+                    <p className='hover:text-primary hidden sm:block'>Partnership</p>
                 </div>
             </div>
         </aside>
-        <section className='bg-[#111215] w-full'>
+        <section className='bg-[#111215] w-[90%] sm:w-[80%]'>
             {type === 'account' && <Account />}
             {type === 'payments' && <Payments />}
             {type === 'history' && <History />}

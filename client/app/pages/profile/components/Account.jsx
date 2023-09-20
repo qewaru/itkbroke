@@ -19,7 +19,7 @@ export default function Account() {
   }
 
   return (
-    <div className='flex justify-center gap-36 py-10'>
+    <div className='flex flex-col md:flex-row justify-center gap-10 md:gap-36 py-10 px-5 md:px-0'>
       <div className='flex flex-col'>
         <div className='flex text-xl gap-3 items-center'>
           <p>{data.name1} {data.name2}</p>
