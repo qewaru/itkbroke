@@ -103,7 +103,7 @@ app.post('/api/login', async (req, res) => {
                         res.status(200).send('AllowedEntry')
                     } else {
                         console.log(token)
-                        res.cookie('jwt', token,  { httpOnly: false, secure: true, domain: 'https://itkbroke.vercel.app', path: '/' })
+                        res.cookie('jwt', token,  { httpOnly: false, secure: true, sameSite: 'none' })
                         res.status(200).send('Allowed')
                     }
                 } else {
