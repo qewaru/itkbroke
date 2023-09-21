@@ -22,7 +22,6 @@ export default function Cart() {
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
       body: JSON.stringify(items)
     })
     const json = await response.json()
