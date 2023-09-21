@@ -8,6 +8,14 @@ import Link from 'next/link'
 export default function Navbar() {
   const [toggle, setToggle] = useState(false)
 
+  const links = [
+    ['New in', '/pages/new'],
+    ['Brands', '/pages/brands'],
+    ['Clothing', '/pages/clothing'],
+    ['Accessories', '/pages/accessories'],
+    ['Sale', '/pages/sale'],
+  ]
+
   const handleToggle = () => {
     setToggle(!toggle)
   }
@@ -21,13 +29,7 @@ export default function Navbar() {
           </Link>
         </div>
         <div className='hidden semimd:flex gap-12 text-xl'>
-            {[
-              ['New in', '/pages/new'],
-              ['Brands', '/pages/brands'],
-              ['Clothing', '/pages/clothing'],
-              ['Accessories', '/pages/accessories'],
-              ['Sale', '/pages/sale'],
-            ].map(([title, url], index) => (
+            {links.map(([title, url], index) => (
               <a key={index} href={url} className='hover:text-primary'>{title}</a>
             ))}
         </div>
@@ -51,6 +53,17 @@ export default function Navbar() {
                 <IoIosClose size={35} />
               </div>
             </header>
+            <section className='flex flex-col h-full justify-between pt-5 pb-16 px-6'>
+              <div className='flex flex-col gap-4 items-end'>
+                {links.map(([title, url], index) => (
+                  <a key={index} href={url} className='hover:text-primary focus:text-primary text-lg'>{title}</a>
+                ))}
+              </div>
+              <div className='flex flex-col gap-4 items-end'>
+                <a href='/pages/cart'>Cart</a>
+                <a href='/pages/profile'>Profile</a>
+              </div>
+            </section>
           </aside>
         </div>
     </header>

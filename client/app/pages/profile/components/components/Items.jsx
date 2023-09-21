@@ -108,10 +108,10 @@ export default function Items() {
               <tr>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Price</th>
-                <th>Total sales</th>
-                <th>Release date</th>
-                <th>Status</th>
+                <th className='hidden md:block'>Price</th>
+                <th className='hidden md:block'>Total sales</th>
+                <th className='hidden md:block'>Release date</th>
+                <th className='hidden md:block'>Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -123,10 +123,10 @@ export default function Items() {
                     <td className='text-accent'>
                       <a href={`/pages/clothing/${item.shortName}`}>{item.name}</a>
                     </td>
-                    <td>{item.price}</td>
-                    <td>-</td>
-                    <td>{item.date}</td>
-                    <td>{item.status}</td>
+                    <td className='hidden md:block'>{item.price}</td>
+                    <td className='hidden md:block'>-</td>
+                    <td className='hidden md:block'>{item.date}</td>
+                    <td className='hidden md:block'>{item.status}</td>
                     <td className='text-center'>
                       <button className='bg-transparent border-2 border-primary' onClick={() => handleEdit(item._id)}>Edit</button>
                     </td>

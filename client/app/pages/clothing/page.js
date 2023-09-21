@@ -6,6 +6,7 @@ const source = '/images/banners.png'
 
 export default function Clothing() {
   const [data, setData] = useState([])
+  const [prices, setPrices] = useState([])
 
   useEffect(() => {
     fetchData()
@@ -19,6 +20,18 @@ export default function Clothing() {
     setData(jsonResponse)
   }
 
+  useEffect(() => {
+    let prices = []
+    data.map((item) => {
+      const itemPrice = parseFloat(item.price)
+      prices.push(itemPrice)
+    })
+    const min = Math.min.apply(Math, prices)
+    const max = Math.max.apply(Math, prices)
+    prices = [min, max]
+    setPrices(prices)
+  }, [data])
+
   const handleLink = (id) => {
     const array = data.find((item) => item._id === id)
     window.location.href = `/pages/clothing/${ array.shortName }`
@@ -26,7 +39,7 @@ export default function Clothing() {
 
   return (
     <>
-      <Filter />
+      <Filter data={prices} />
       <section>
         <div className="flex justify-center w-full h-full py-[75px]">
           <div className="grid grid-cols-1 gap-16 lg:gap-24 lg:grid-cols-3 semimd:grid-cols-2">

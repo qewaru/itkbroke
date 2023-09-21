@@ -53,7 +53,7 @@ export default function Page({ params }) {
                 <p className='text-background'>Added to <a href='/pages/cart' className='underline text-background'>cart</a></p>
             </div>
         }
-        <section className='relative flex justify-center w-full h-full py-10 text-lg'>
+        <section className='relative flex justify-center w-full h-full py-10 px-5 semimd:px-0 text-lg'>
             
             <div className='flex flex-col'>
                 <div className='text-lg'>
@@ -65,10 +65,11 @@ export default function Page({ params }) {
                     <div className='flex flex-col '>
                         <div className='flex items-center justify-center gap-5 my-10'>
                             <MdKeyboardArrowLeft size={30} className='cursor-pointer' />
-                            <img src={ data.files } className='w-[300px] md:w-[500px] md:h-[500px]' />
+                            <img src={ data.files } className='w-[250px] sm:w-[300px] md:w-[500px] md:h-[500px]' />
                             <MdKeyboardArrowRight size={30} className='cursor-pointer' />
                         </div>
-                        <div className='grid grid-cols-5 gap-5 my-10'>
+                        <div>
+                        <div className='grid-cols-5 gap-5 my-10 hidden sm:grid'>
                             <img src={ source } className='w-[70px] h-[70px] cursor-pointer' />
                             <img src={ source } className='w-[70px] h-[70px] cursor-pointer' />
                             <img src={ source } className='w-[70px] h-[70px] cursor-pointer' />
@@ -79,10 +80,14 @@ export default function Page({ params }) {
                             <img src={ source } className='w-[70px] h-[70px] cursor-pointer' />
                             <img src={ source } className='w-[70px] h-[70px] cursor-pointer' />
                             <img src={ source } className='w-[70px] h-[70px] cursor-pointer' />
+                        </div>
+                        <div>
+                            {/* rounded things */}
+                        </div>
                         </div>
                     </div>
                     <div className='flex flex-col my-8 w-full justify-between md:flex-row semimd:flex-col lg:w-[400px] lg:justify-normal'>
-                        <div className='w-[50%] lg:w-full'>
+                        <div className='w-full'>
                             <div>
                                 <a className='text-xl font-bold hover:text-primary' href='/'>Brand Name</a>
                                 <p>{data.name}</p>
@@ -101,7 +106,7 @@ export default function Page({ params }) {
                         </div>
                         <div className=''>
                             <div className='flex justify-between border-b border-b-[#FFFFFF]/20'>
-                                <button className='mx-2 px-2 border-b border-b-primary text-primary'>Details</button>
+                                <nav className='mx-2 px-2 border-b border-b-primary text-primary'>Details</nav>
                             </div>
                             <div className='my-2'>
                                 <ul>

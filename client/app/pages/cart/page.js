@@ -65,6 +65,11 @@ export default function Cart() {
     setCartItems((prevItems) => prevItems.filter((item) => item.size !== itemRemoveSize))
   }
 
+  const emptyCart = () => {
+    setItems(null)
+    setCartItems([])
+  }
+
   useEffect(() => {
     secureLocalStorage.setItem('cart', cartItems)
   })
@@ -78,33 +83,39 @@ export default function Cart() {
         <section className='px-5 sm:px-10 py-3 w-full sm:w-[80%] border-b border-b-second sm:border-none'>
           {items && 
             <div className='flex flex-col gap-5'>
-              <div className='flex justify-between text-lg py-3 px-5'>
+              <div className='justify-between hidden sm:flex text-base sm:text-lg py-3 px-5'>
                 <p>Item information</p>
+                <p></p>
                 <p>Price</p>
-                <p>Quantity</p>
+                {/* <p>Quantity</p> */}
                 <p>Size</p>
                 <p></p>
               </div>
               <div className='flex flex-col gap-5 py-5 border-t border-b border-secondary'>
                 {items.map((item) => (
-                  <div key={item.index} className='flex items-center justify-between px-5'>
+                  <div key={item.index} className='flex items-center justify-between px-0 sm:px-5'>
                     <div className='flex gap-4 items-center'>
-                      <img src={ item.files } className='w-[200px] h-[200px]' />
+                      <img src={ item.files } className='w-[100px] h-[100px] sm:w-[200px] sm:h-[200px]' />
                       <div className='flex flex-col text-lg gap-3'>
                         <p>{item.brandName}</p>
                         <p className='text-base'>{item.name}</p>
                       </div>
                     </div>
-                    <p>{item.price} €</p>
-                    <input type='number' min={1} max={100} className='max-w-[80px]' />
-                    <p>{item.size}</p>
+                    <div className='flex flex-col sm:hidden gap-4'>
+                      <p>{item.price} €</p>
+                      {/* <input type='number' min={1} max={100} className='max-w-[80px]' /> */}
+                      <p>Size: {item.size}</p>
+                    </div>
+                    <p className='hidden sm:block'>{item.price} €</p>
+                    {/* <input type='number' min={1} max={100} className='max-w-[80px]' /> */}
+                    <p className='hidden sm:block'>{item.size}</p>
                     <div onClick={ () => onRemoveItem(item.index, item.size)} className='cursor-pointer'>
                       <AiOutlineMinusCircle size={25} />
                     </div>
                   </div>
                 ))}
               </div>
-              <button className='text-lg bg-secondary hover:bg-primary px-4 py-3'>Empty cart</button>
+              <button onClick={emptyCart} className='text-lg bg-secondary hover:bg-primary px-4 py-3'>Empty cart</button>
             </div> 
           }
           {!items && 
