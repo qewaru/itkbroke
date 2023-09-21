@@ -29,19 +29,6 @@ export default function Profile() {
         }
       }, [])
 
-    // useEffect(() => {
-    //     getData()
-    // }, [])
-
-    // const getData = async () => {
-    //     const response = await fetch('http://localhost:4000/api/userInfo', {
-    //       method: 'GET',
-    //       credentials: 'include'
-    //     })
-    //     const jsonResponse = await response.json()
-    //     setData(jsonResponse)
-    //   }
-
   return (
     <>
     {status === false &&

@@ -28,7 +28,7 @@ async function connect() {
 }
 connect()
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
+app.use(cors({ origin: 'https://itkbroke.vercel.app', credentials: true }))
 app.use(express.json({limit: '10mb'}))
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 app.use(cookieParser())
@@ -55,8 +55,8 @@ app.post('/api/checkout', async (req, res) => {
                 }
               }),
               mode: 'payment',
-              success_url: 'http://localhost:3000/pages/cart/checkout/success',
-              cancel_url: 'http://localhost:3000/pages/cart/checkout/cancel',
+              success_url: 'https://itkbroke.vercel.app/pages/cart/checkout/success',
+              cancel_url: 'https://itkbroke.vercel.app/pages/cart/checkout/cancel',
         })
         res.status(303).send({url: session.url})
     } catch (error) {
@@ -331,5 +331,4 @@ app.get('/api/browseItems', async (req, res) => {
 // SERVER PORT
 app.listen(process.env.PORT, () => {
     console.log('Server started on port 4000')
-    console.log('Direct link: http://localhost:4000')
 })
