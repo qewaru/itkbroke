@@ -86,6 +86,13 @@ app.post('/api/checkout', async (req, res) => {
     const data = req.body
     const token = req.cookies.jwt
     try {
+        let email = ''
+
+        if (token) {
+            const decodeToken = jwt.verify(token, process.env.SECRET)
+            email = decodeToken.email
+        }
+     
         const decodeToken = jwt.verify(token, process.env.SECRET)
         const itemIds = data.map((item) => new ObjectId(item.id))
         const itemData = await db.collection('items').find({ _id: { $in: itemIds } }).toArray()
@@ -111,7 +118,7 @@ app.post('/api/checkout', async (req, res) => {
             return {
                 itemId: item._id,
                 itemName: item.name,
-                customer: decodeToken.email,
+                customer: email,
                 seller: item.email,
                 sessionDate: new Date().toISOString().substring(0, 10),
                 payment: 'in process'
