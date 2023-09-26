@@ -82,13 +82,24 @@ export default function Items() {
         setToggle(false)
       }
     }
+
+    // const handleEditItem = async () => {
+    //   const response = await fetch('http://localhost:4000/api/updateItem', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(itemData),
+    //     credentials: 'include'
+    //   })
+    // }
   
     useEffect(() => {
       fetchData()
     }, [])
   
     const fetchData = async () => {
-      const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/browseItems', {
+      const response = await fetch('http://localhost:4000/api/browseItems', {
         method: 'GET',
         credentials: 'include'
       })
@@ -108,10 +119,10 @@ export default function Items() {
               <tr>
                 <th>Image</th>
                 <th>Name</th>
-                <th className='hidden md:block'>Price</th>
-                <th className='hidden md:block'>Total sales</th>
-                <th className='hidden md:block'>Release date</th>
-                <th className='hidden md:block'>Status</th>
+                <th className='hidden md:table-cell'>Price</th>
+                <th className='hidden md:table-cell'>Total sales</th>
+                <th className='hidden md:table-cell'>Release date</th>
+                <th className='hidden md:table-cell'>Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -123,10 +134,10 @@ export default function Items() {
                     <td className='text-accent'>
                       <a href={`/pages/clothing/${item.shortName}`}>{item.name}</a>
                     </td>
-                    <td className='hidden md:block'>{item.price}</td>
-                    <td className='hidden md:block'>-</td>
-                    <td className='hidden md:block'>{item.date}</td>
-                    <td className='hidden md:block'>{item.status}</td>
+                    <td className='hidden md:table-cell'>{item.price}</td>
+                    <td className='hidden md:table-cell'>-</td>
+                    <td className='hidden md:table-cell'>{item.date}</td>
+                    <td className='hidden md:table-cell'>{item.status}</td>
                     <td className='text-center'>
                       <button className='bg-transparent border-2 border-primary' onClick={() => handleEdit(item._id)}>Edit</button>
                     </td>
@@ -170,7 +181,7 @@ export default function Items() {
           </form>
         }
         {edit !== '' ?
-          <form className='relative flex flex-col px-10'>
+          <form  className='relative flex flex-col px-10'>
             <IoIosClose size={30} className='absolute z-10 right-0 top-0 cursor-pointer' onClick={() => handleEdit('')} />
             <p className='text-lg font-bold'>Edit item</p>
             <div className='flex justify-between'>
@@ -236,7 +247,9 @@ export default function Items() {
                       <option value='unavailable'>Remove from sale</option>
                     </select>
                   </div>
+                  <button type='submit'>Update</button>
                 </div>
+                
               </div>
             </div>
           </form>

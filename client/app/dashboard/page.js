@@ -8,10 +8,9 @@ export default function Page() {
   const [brandData, setBrandData] = useState([])
 
   const handleLink = (email) => {
-    // event.preventDefault()
     const array = data.find((user) => user.email === email)
     localStorage.setItem('brandData', JSON.stringify(array))
-    window.location.href = `https://itkbroke.vercel.app/dashboard/verify/${ array.name }`
+    window.location.href = `/verify/${ array.name }`
   }
 
   useEffect(() => {

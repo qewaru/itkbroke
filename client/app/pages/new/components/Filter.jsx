@@ -4,17 +4,32 @@ import { BiFilterAlt } from 'react-icons/bi'
 import { MdOutlineKeyboardArrowDown,  MdOutlineKeyboardArrowUp } from 'react-icons/md'
 import { IoIosClose } from 'react-icons/io'
 
-const buttons = ['Hoodies', 'Pants', 'T-Shirts', 'Jackets']
-const category = ['Denim', 'Hoodies', 'Jackets', 'Pants', 'Polo Shirts', 'Sweatshirts', 'T-Shirts', ]
+const buttons = ['Headwear', 'Jewellery', 'Hoodies', 'Pants', 'T-Shirts', 'Jackets']
+const category = ['Headwear', 'Jewellery', 'Denim', 'Hoodies', 'Jackets', 'Pants', 'Polo Shirts', 'Sweatshirts', 'T-Shirts']
 const size = ['XS', 'S', 'M', 'L', 'XL', 'XL+']
-const colors = ['Black', 'Blue', 'Brown', 'Gold', 'Green', 'Grey', 'Navy', 'Multi', 'Orange', 'Pink', 'Purple', 'Red', 'White', 'Yellow', ]
+const colors = ['Black', 'Blue', 'Brown', 'Gold', 'Green', 'Grey', 'Navy', 'Multi', 'Orange', 'Pink', 'Purple', 'Red', 'Silver', 'White', 'Yellow', ]
 
 export default function Filter(prices) {
-  const [ toggle, setToggle ] = useState(false)
-  const [ open, setOpen ] = useState({})
+  const [toggle, setToggle] = useState(false)
+  const [open, setOpen] = useState({  })
   const [ value1, setValue1 ] = useState(prices.data[0])
   const [ value2, setValue2 ] = useState(prices.data[0])
 
+  const handleRange1 = (event) => {
+      const value = parseInt(event.target.value)
+      setValue1(value)       
+      if (value > value2) {
+        setValue2(value)
+      }
+    }
+
+  const handleRange2 = (event) => {
+      const value = parseInt(event.target.value)
+      setValue2(value)       
+      if (value < value1) {
+        setValue1(value)
+      }
+  }
   const handleToggle = () => {
     setToggle(!toggle)
   }
@@ -25,24 +40,6 @@ export default function Filter(prices) {
         [openId]: !prevVisability[openId],
     }))
   }
-
-    const handleRange1 = (event) => {
-        const value = parseInt(event.target.value)
-        setValue1(value)
-
-        if (value > value2) {
-          setValue2(value)
-        }
-      }
-
-    const handleRange2 = (event) => {
-        const value = parseInt(event.target.value)
-        setValue2(value)
-
-        if (value < value1) {
-          setValue1(value)
-        }
-      }
 
   return (
     <header className="flex justify-center w-full h-[auto] pt-[45px] text-lg">
@@ -74,8 +71,8 @@ export default function Filter(prices) {
           </div>
         </div>
 
-        <div className={`top-0 left-0 w-full h-screen bg-black/50 ${toggle ? 'fixed' : 'hidden'}`}></div>
-        <aside className={`top-0 left-0 fixed flex flex-col justify-between p-6 bg-background w-[100%] h-full lg:w-[30%] semimd:w-[40%] md:w-[50%] transition duration-300 ease-in-out ${toggle ? 'translate-x-0' : 'translate-x-[-100%]'}`}>
+        <div className={`z-20 top-0 left-0 w-full h-screen bg-black/50 ${toggle ? 'fixed' : 'hidden'}`}></div>
+        <aside className={`z-20 top-0 left-0 fixed flex flex-col justify-between p-6 bg-background w-[100%] h-full lg:w-[30%] semimd:w-[40%] md:w-[50%] transition duration-300 ease-in-out ${toggle ? 'translate-x-0' : 'translate-x-[-100%]'}`}>
             <header className='flex justify-between pb-5 pt-0'>
                 <p className='text-lg font-bold'>All Filters</p>
                 <div onClick={ handleToggle } className='flex justify-end cursor-pointer'>

@@ -11,7 +11,9 @@ export default function LogAccount() {
       email: '',
       password: '',
       date: '',
-      role: 'user'
+      role: 'user',
+      notifications: {newsletter: false, following: false},
+      follow: []
     })
   
     const handleSwitch = (type) => {
@@ -71,7 +73,7 @@ export default function LogAccount() {
         location.reload()
       } else if (data === 'AllowedEntry') {
         sessionStorage.setItem('isAdmin', 'true')
-        window.location.href = 'https://itkbroke.vercel.app/dashboard'
+        window.location.href = '/dashboard'
       } else {
         handleError(data)
       }

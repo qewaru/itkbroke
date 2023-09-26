@@ -25,7 +25,7 @@ export default function Navbar() {
       <div className='flex items-center justify-between w-full h-full'>
         <div className='w-[80px] ml-5'>
           <Link href='/'>
-            logo
+            <img src='/images/zxcursed.gif' className='w-[30px] rounded-full'/>
           </Link>
         </div>
         <div className='hidden semimd:flex gap-12 text-xl'>
