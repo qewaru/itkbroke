@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { BsHeartFill, BsHeartbreakFill} from 'react-icons/bs'
 import secureLocalStorage from 'react-secure-storage'
 
-const source = '/images/banners.png'
-
 export default function Brand({params}) {
   const [data, setData] = useState([])
   const [ itemData, setItemData ] = useState([])
@@ -17,7 +15,7 @@ export default function Brand({params}) {
 
   const fetchData = async () => {
     const name = params.shortName
-    const response = await fetch(`http://localhost:4000/api/brand/${name}`, {
+    const response = await fetch(`https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/brand/${name}`, {
       method: 'GET',
       credentials: 'include',
     })
@@ -26,7 +24,7 @@ export default function Brand({params}) {
   }
 
   const fetchItems = async () => { 
-    const response = await fetch('http://localhost:4000/api/getBrandItems', {
+    const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/getBrandItems', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +39,7 @@ export default function Brand({params}) {
 
   const handleFollow = async () => {
     const id = { _id: data._id}
-    const response = await fetch('http://localhost:4000/api/setFollow', {
+    const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/setFollow', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
