@@ -32,7 +32,7 @@ app.use(cors({ origin: 'https://itkbroke.vercel.app', credentials: true }))
 
 app.post('/api/stripeHook', express.raw({type: 'application/json'}), async (req, res) => {
     const sign = req.headers['stripe-signature']
-    const endpointSecret = 'whsec_06f8caa18f910c491b8eef8905a61eb9c5268f85521ccf3da9dd22fabe05ff6f'
+    const endpointSecret = 'whsec_0EIerWl824dzqTwF7PvnefzUzXTI33v5'
     let event
     try {
         const payload = req.body
