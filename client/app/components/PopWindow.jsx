@@ -43,7 +43,7 @@ export default function PopWindow() {
       ...userData,
       date: currentDate,
     };
-    const response = await fetch('http://localhost:4000/api/registration', {
+    const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/registration', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export default function PopWindow() {
 
   const handleLog = async (event) => {
     event.preventDefault()
-    const response = await fetch('http://localhost:4000/api/login', {
+    const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export default function PopWindow() {
       location.reload()
     } else if (data === 'AllowedEntry') {
       sessionStorage.setItem('isAdmin', 'true')
-      window.location.href = 'http://localhost:3000/dashboard'
+      window.location.href = '/dashboard'
     } else {
       handleError(data)
     }
