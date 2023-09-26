@@ -1,4 +1,4 @@
-// NOTES
+ // NOTES
 
 // DEPENDENICES
 const express = require('express')
@@ -162,7 +162,7 @@ app.post('/api/login', async (req, res) => {
             if (err) {
                 throw err
             }
-
+            
             if (user) {
                 const compare = await bcrypt.compare(userData.password, user.password)
                 if (compare) {
@@ -170,7 +170,7 @@ app.post('/api/login', async (req, res) => {
                     if (user.email === 'admin') {
                         res.status(200).send('AllowedEntry')
                     } else {
-                        res.cookie('jwt', token,  { httpOnly: true, secure: false })
+                        res.cookie('jwt', token,  { httpOnly: false, secure: true, sameSite: 'none' })
                         res.status(200).send('Allowed')
                     }
                 } else {
