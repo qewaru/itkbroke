@@ -54,6 +54,11 @@ app.post('/api/stripeHook', express.raw({type: 'application/json'}), async (req,
                     {customer: customerEmail, payment: 'in process'},
                     { $set: { payment: 'session_completed' }}
                 )
+            } else {
+                await db.collection('purchase').updateOne(
+                    {customer: '', payment: 'in process'},
+                    { $set: { payment: 'session_completed' }}
+                )
             }
 
             res.send(200)
@@ -145,7 +150,7 @@ app.post('/api/registration', async (req, res) => {
                 }
                 if (user) {
                     const token = jwt.sign({email: userData.email}, process.env.SECRET)
-                    res.cookie('jwt', token,  { httpOnly: true, secure: false, sameSite: 'none' })
+                    res.cookie('jwt', token,  { httpOnly: false, secure: true, sameSite: 'none' })
                     res.status(200).send('Allowed')
                 }
             })
