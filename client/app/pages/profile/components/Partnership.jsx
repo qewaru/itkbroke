@@ -33,7 +33,7 @@ export default function Partnership() {
   const handleSubmit = async (event) => {
     console.log(userData)
     event.preventDefault()
-    const response = await fetch('http://localhost:4000/api/verification', {
+    const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/verification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ export default function Partnership() {
 
   useEffect(()  => {
     const data = async () => {
-      const response = await fetch('http://localhost:4000/api/auth', {
+      const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/auth', {
         method: 'GET',
         credentials: 'include'
       })
