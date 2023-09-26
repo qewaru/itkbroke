@@ -28,7 +28,7 @@ async function connect() {
 }
 connect()
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
+app.use(cors({ origin: 'https://itkbroke.vercel.app', credentials: true }))
 
 app.post('/api/stripeHook', express.raw({type: 'application/json'}), async (req, res) => {
     const sign = req.headers['stripe-signature']
@@ -98,8 +98,8 @@ app.post('/api/checkout', async (req, res) => {
                 }
               }),
               mode: 'payment',
-              success_url: 'http://localhost:3000/pages/cart/checkout/success',
-              cancel_url: 'http://localhost:3000/pages/cart/checkout/cancel',
+              success_url: 'https://itkbroke.vercel.app/pages/cart/checkout/success',
+              cancel_url: 'https://itkbroke.vercel.app/pages/cart/checkout/cancel',
         })
 
         const paymentData = itemData.map(item => {
