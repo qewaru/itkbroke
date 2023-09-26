@@ -11,7 +11,7 @@ export default function Page() {
 
     const handleSubmit = async (state) => {
         const request = { status: state, data: data }
-        const response = await fetch('http://localhost:4000/updateVerify', {
+        const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/updateVerify', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -20,10 +20,10 @@ export default function Page() {
             })
             if (response.status === 200) {
                 localStorage.removeItem('brandData')
-                window.location.href = 'http://localhost:3000/dashboard'
+                window.location.href = '/dashboard'
             } else if (response.status === 400) {
                 localStorage.removeItem('brandData')
-                window.location.href = 'http://localhost:3000/dashboard'
+                window.location.href = '/dashboard'
             }
     }
 
