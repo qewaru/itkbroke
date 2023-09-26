@@ -4,6 +4,22 @@ import { AiOutlineEdit } from 'react-icons/ai'
 
 export default function Account() {
   const [ data, setData ] = useState([])
+  const [ checked, setChecked ] = useState(false)
+  const [toggle, setToggle] = useState({
+    newsletter: true,
+    following: false
+  })
+
+  // const notifications = [
+  //   {value: 'all', text: 'Turn on/off all notifications'}, 
+  //   {value: 'newsletter', text: 'Newsletter'}, 
+  //   {value: 'following', text: 'Following brands'}
+  // ]
+
+  const notifications = [
+    {value: 'newsletter', text: 'Newsletter'}, 
+    {value: 'following', text: 'Following brands'}
+  ]
   
   useEffect(() => {
     fetchData()
@@ -16,6 +32,32 @@ export default function Account() {
     })
     const jsonResponse = await response.json()
     setData(jsonResponse)
+    setToggle(jsonResponse.notifications)
+  }
+
+  const handleChecked = () => {
+    setChecked(!checked)
+  }
+
+  const handleSwitch = (value) => {
+    setToggle((prevState) => ({
+      ...prevState,
+      [value]: !prevState[value]
+    }))
+  }
+
+  const saveNotifs = async () => {
+    const response = await fetch('http://localhost:4000/api/setNotifs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(toggle)
+    })
+    if (response.status === 200) {
+      console.log('ok')
+    }
   }
 
   return (
@@ -59,28 +101,25 @@ export default function Account() {
         <div className='flex flex-col gap-3'>
           <p className='text-xl'>Notifications</p>
           <div className='flex flex-col gap-2 text-lg'>
-            <div className='flex'>
-              <input type='checkbox' />
-              <p>Turn on/off all notifications</p>
-            </div>
-            <div className='flex'>
-              <input type='checkbox' />
-              <p>Newsletter</p>
-            </div>
-            <div className='flex'>
-              <input type='checkbox' />
-              <p>Following brands</p>
-            </div>
+            {notifications.map((item, index) => (
+              <div key={index} className='flex gap-2 items-center'>
+                <div onClick={ () => handleSwitch(item.value)} className={`flex w-[40px] h-[20px] rounded-full cursor-pointer ${toggle[item.value] ? 'bg-accent' : 'bg-gray-600'}`}>
+                  <span className={`w-[20px] h-[20px] bg-slate-200 rounded-full  transition-all duration-200 ${toggle[item.value] ? 'ml-[20px]' : ''}`} />
+                </div>
+                <p>{item.text}</p>
+              </div>
+            ))}
           </div>
+          <button onClick={saveNotifs} className='bg-secondary hover:bg-primary w-[50%]'>Save</button>
         </div>
         <div className='flex flex-col gap-5 text-xl max-w-[400px]'>
           <p className='text-primary'>Delete account</p>
           <p className='break-words'>Once you delete your account, you cannot restore it!</p>
           <div className='flex gap-3'>
-            <input type='checkbox'/>
+            <input onChange={handleChecked} type='checkbox'/>
             <p className='text-sm'>I confirm that I want to delete my account without the possibility of recovery</p>
           </div>
-          <button className='text-lg bg-secondary hover:bg-primary px-4 py-3'>Delete account</button>
+          <button className={`text-lg px-4 py-3 ${checked ? 'bg-secondary hover:bg-primary' : 'hover:bg-second bg-second'}`} disabled={checked ? false : true}>Delete account</button>
         </div>
       </div>
     </div>

@@ -39,7 +39,7 @@ export default function Page({ params }) {
     
       const fetchData = async () => {
         const name = params.name
-        const response = await fetch(`https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/item/${name}`, {
+        const response = await fetch(`http://localhost:4000/api/item/${name}`, {
           method: 'GET',
         })
         const jsonResponse = await response.json()

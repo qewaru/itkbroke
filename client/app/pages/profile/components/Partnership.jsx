@@ -8,6 +8,7 @@ export default function Partnership() {
   const [ userData, setUserData] = useState({
     name: '',
     type: '',
+    logo: '',
     files: ''
   })
 
@@ -16,6 +17,16 @@ export default function Partnership() {
     setUserData((prevData) => ({
       ...prevData,
       [name]: value,
+    }))
+  }
+
+  const handleFile = async (e) => {
+    const { name } = e.target
+    const file = e.target.files[0]
+    const base64 = await convertToBase64(file)
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: base64,
     }))
   }
 
@@ -31,7 +42,6 @@ export default function Partnership() {
         credentials: 'include'
       })
     const res = await response.text()
-    console.log(res)
     setRole(res)
   }
 
@@ -95,8 +105,12 @@ export default function Partnership() {
                 />
               </div>
               <div className='flex flex-col'>
+                <p>Brand logo</p>
+                <input type='file' accept="image/png, image/jpeg, image/jpg" name='logo' onChange={ (e) => handleFile(e) } className='border-none p-0'/>
+              </div>
+              <div className='flex flex-col'>
                 <p>Product examples</p>
-                <input type='file' accept="image/png, image/jpeg, image/jpg" className='border-none p-0'/>
+                <input type='file' accept="image/png, image/jpeg, image/jpg" name='files' onChange={ (e) => handleFile(e) } className='border-none p-0'/>
               </div>
             </div>
             <div className='flex flex-col gap-3 my-3 items-center'>
@@ -113,4 +127,17 @@ export default function Partnership() {
       
     </div>
   )
+}
+
+function convertToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader()
+    fileReader.readAsDataURL(file)
+    fileReader.onload = () => {
+      resolve(fileReader.result)
+    }
+    fileReader.onerror = (error) => {
+      reject(error)
+    }
+  })
 }

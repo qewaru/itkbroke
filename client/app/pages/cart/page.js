@@ -3,21 +3,23 @@ import React, { useState, useEffect } from 'react'
 import { AiOutlineMinusCircle } from 'react-icons/ai'
 import secureLocalStorage from 'react-secure-storage'
 import Empty from './components/Empty'
+import Loading from './components/Loading'
 
 export default function Cart() {
   const [ data, setData ] = useState([])
   const [ cartItems, setCartItems ] = useState([])
-  const [ items, setItems ] = useState(null)
+  const [ items, setItems ] = useState([])
   const [ total, setTotal ] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const storageItems = secureLocalStorage.getItem('cart')
-    setCartItems(storageItems)
+    setCartItems(storageItems)    
     fetchData(storageItems)
   }, [])
 
   const fetchData = async (items) => {
-    const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/api/getCartItems', {
+    const response = await fetch('http://localhost:4000/api/getCartItems', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,9 +28,11 @@ export default function Cart() {
     })
     const json = await response.json()
     setData(json)
+    setIsLoading(false)
   }
 
   useEffect(() => {
+    console.log(cartItems)
     if (cartItems.length > 0 && data.length > 0) {
       const updatedItems = cartItems.map((item1, index) => {
         const matching = data.find((item2) => item2._id === item1.id)
@@ -81,7 +85,11 @@ export default function Cart() {
       </header>
       <section className='flex flex-col sm:flex-row items-center sm:items-start'>
         <section className='px-5 sm:px-10 py-3 w-full sm:w-[80%] border-b border-b-second sm:border-none'>
-          {items && 
+          {isLoading ? (
+            < Loading/>
+          ) : data.length === 0 && items.length === 0 ? (
+            <Empty />
+          ) : (
             <div className='flex flex-col gap-5'>
               <div className='justify-between hidden sm:flex text-base sm:text-lg py-3 px-5'>
                 <p>Item information</p>
@@ -116,11 +124,8 @@ export default function Cart() {
                 ))}
               </div>
               <button onClick={emptyCart} className='text-lg bg-secondary hover:bg-primary px-4 py-3'>Empty cart</button>
-            </div> 
-          }
-          {!items && 
-            <Empty />  
-          }
+            </div>
+          )}
         </section>
         <footer className='flex flex-col gap-4 w-full semimd:w-[20%] p-5'>
           <p className='text-primary font-bold text-lg'>Summary</p>

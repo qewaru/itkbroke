@@ -68,7 +68,7 @@ export default function Profile() {
                         <AiOutlineHistory className='w-[20px] md:[25px]' />
                         <p className='hover:text-primary hidden sm:block'>History</p>
                     </div>
-                    <div onClick={ () => handleType('following') } className='flex cursor-pointer gap-3' items-center>
+                    <div onClick={ () => handleType('following') } className='flex cursor-pointer gap-3 items-center'>
                         <AiOutlineHeart className='w-[20px] md:[25px]' />
                         <p className='hover:text-primary hidden sm:block'>Following</p>
                     </div>
