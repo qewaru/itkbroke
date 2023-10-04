@@ -60,7 +60,7 @@ export default function Profile() {
                         <FiUser className='w-[20px] md:[25px]' />
                         <p className='hover:text-primary hidden sm:block'>Account</p>
                     </div>
-                    <div onClick={ () => handleType('payments') } className='flex cursor-pointer gap-3 items-center'>
+                    <div className='flex cursor-pointer gap-3 items-center'>
                         <BiCreditCard className='w-[20px] md:[25px]' />
                         <p className='hover:text-primary hidden sm:block'>Payments</p>
                     </div>
