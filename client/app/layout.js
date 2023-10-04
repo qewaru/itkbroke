@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/images/zxcursed.gif" sizes="any" />
       </head>
-      <body className='bg-background'>
+      <body className='bg-body'>
         { children }
       </body>
     </html>
