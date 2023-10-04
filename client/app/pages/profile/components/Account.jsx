@@ -60,6 +60,24 @@ export default function Account() {
     }
   }
 
+  const handleDelete = async () => {
+    const response = await fetch('http://localhost:4000/api/deleteAccount', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(data)
+    })
+
+    const res = await response.text()
+    console.log(res)
+    if (res === 'deleted') {
+      localStorage.setItem('hasLoggedIn', 'false')
+      window.location.reload()
+    }
+  }
+
   return (
     <div className='flex flex-col md:flex-row justify-center gap-10 md:gap-36 py-10 px-5 md:px-0'>
       <div className='flex flex-col'>
@@ -119,7 +137,7 @@ export default function Account() {
             <input onChange={handleChecked} type='checkbox'/>
             <p className='text-sm'>I confirm that I want to delete my account without the possibility of recovery</p>
           </div>
-          <button className={`text-lg px-4 py-3 ${checked ? 'bg-secondary hover:bg-primary' : 'hover:bg-second bg-second'}`} disabled={checked ? false : true}>Delete account</button>
+          <button onClick={handleDelete} className={`text-lg px-4 py-3 ${checked ? 'bg-secondary hover:bg-primary' : 'hover:bg-second bg-second'}`} disabled={checked ? false : true}>Delete account</button>
         </div>
       </div>
     </div>
