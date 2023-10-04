@@ -358,6 +358,28 @@ app.post('/api/setFollow', async (req, res) => {
     })
 })
 
+app.post('/api/deleteAccount', async (req, res) => {
+    const token = req.cookies.jwt
+    const decodeToken = jwt.verify(token, process.env.SECRET)
+    const userEmail = decodeToken.email
+
+    try {
+        await db.collection('users').deleteOne({ email: userEmail })
+        await db.collection('brands').findOne({email: userEmail}, async (err, user) => {
+            if (user) {
+                db.collection('brands').deleteOne({ email: userEmail })
+            }
+
+            if (err) throw err
+
+            res.clearCookie('jwt')
+            res.send('deleted')
+        })
+    } catch (error) {
+        error
+    }
+})
+
 app.post('/api/getCartItems', async (req, res) => {
     const data = req.body
     try {
