@@ -33,7 +33,7 @@ export default function Profile() {
     <>
     {status === false &&
     <section className='flex'>
-        <aside className='w-[500px] h-screen p-8'>
+        <aside className='w-[500px] h-screen p-8 bg-background/40'>
             <div className='flex flex-col'>
                 <p className='text-bold text-xl'>Your profile</p>
                 <div className='flex flex-col text-lg my-10 px-5 gap-5'>
@@ -52,7 +52,7 @@ export default function Profile() {
 
     {status === true && 
     <section className='flex'>
-        <aside className='w-[10%] sm:w-[30%] lg:w-[20%] h-screen p-0 sm:p-8'>
+        <aside className='w-[10%] sm:w-[30%] lg:w-[20%] h-screen p-0 sm:p-8 bg-background/40'>
             <div className='flex flex-col'>
                 <p className='text-bold text-xl hidden sm:block'>Your profile</p>
                 <div className='flex flex-col text-lg my-10 md:px-5 gap-5 items-center md:items-start'>
