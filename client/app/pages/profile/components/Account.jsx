@@ -61,7 +61,7 @@ export default function Account() {
   }
 
   const handleDelete = async () => {
-    const response = await fetch('http://localhost:4000/api/deleteAccount', {
+    const response = await fetch('https://onec14ee0a51ca570b56ce05a2ff17ab11.onrender.com/deleteAccount', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
