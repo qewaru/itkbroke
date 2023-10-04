@@ -22,7 +22,7 @@ export default function Profile() {
 
     useEffect(() => {
         const hasLoggedIn = localStorage.getItem('hasLoggedIn')
-        if (hasLoggedIn) {
+        if (hasLoggedIn === 'true') {
             setStatus(true)
         } else {
             setStatus(false)
