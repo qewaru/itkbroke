@@ -21,7 +21,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className='w-full h-[50px] border-b border-b-primary/50'>
+    <header className='w-full h-[50px] border-b border-b-primary/50 bg-background'>
       <div className='flex items-center justify-between w-full h-full'>
         <div className='w-[80px] ml-5'>
           <Link href='/'>
